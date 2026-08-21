@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowRight, Github, Linkedin, Mail, MapPin, ExternalLink } from "lucide-react";
-import { personal, heroStats } from "../mock";
+import { personal } from "../mock";
 
 const Hero = () => {
   return (
@@ -141,17 +141,6 @@ $ ./run.sh --mission
             </pre>
           </div>
         </div>
-      </div>
-
-      <div className="container-xl relative z-10 mt-14 grid grid-cols-2 md:grid-cols-4 gap-3">
-        {heroStats.map((stat) => (
-          <div key={stat.label} className="card-surface rounded-lg px-4 py-4">
-            <div className="mono text-white text-sm md:text-base font-medium">
-              {stat.value}
-            </div>
-            <div className="text-white/50 text-[11px] mt-1">{stat.label}</div>
-          </div>
-        ))}
       </div>
     </section>
   );
