@@ -184,7 +184,7 @@ const Contact = () => {
           ) : (
             <form
               onSubmit={onSubmit}
-              className="md:col-span-7 card-surface rounded-xl p-6 md:p-8 reveal"
+              className="md:col-span-7 card-surface rounded-xl p-6 md:p-8 reveal relative overflow-hidden"
             >
               <div
                 aria-hidden="true"
