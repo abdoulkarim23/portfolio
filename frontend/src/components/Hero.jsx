@@ -1,8 +1,11 @@
 import React from "react";
 import { ArrowRight, Github, Linkedin, Mail, MapPin, ExternalLink } from "lucide-react";
-import { personal } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
 
 const Hero = () => {
+  const { personal, t } = useI18n();
+  const p = t.personal;
+
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-36 pb-20 md:pb-28">
       <div className="absolute inset-0 grid-bg" />
@@ -33,7 +36,7 @@ const Hero = () => {
         <div className="md:col-span-8">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mono text-[11px] text-white/70 mb-7">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            {personal.status}
+            {p.status}
           </div>
 
           <h1
@@ -45,16 +48,16 @@ const Hero = () => {
           </h1>
 
           <p className="mt-4 mono text-[#38bdf8] text-sm md:text-base">
-            &lt;{personal.title}/&gt;
+            &lt;{p.title}/&gt;
             <span className="blink text-white/50">_</span>
           </p>
 
           <p className="mt-6 text-white/70 max-w-2xl text-base md:text-lg leading-relaxed">
-            {personal.tagline}
+            {p.tagline}
           </p>
 
           <div className="mt-5 flex flex-wrap gap-2">
-            {personal.chips.map((chip) => (
+            {p.chips.map((chip) => (
               <span key={chip} className="chip">
                 {chip}
               </span>
@@ -66,7 +69,7 @@ const Hero = () => {
               href="#projects"
               className="btn-primary rounded-md px-5 py-3 text-sm font-medium inline-flex items-center gap-2"
             >
-              Voir les projets
+              {t.ui.seeProjects}
               <ArrowRight size={16} />
             </a>
             <a
@@ -74,14 +77,14 @@ const Hero = () => {
               className="btn-outline rounded-md px-5 py-3 text-sm font-medium inline-flex items-center gap-2"
             >
               <Mail size={16} />
-              Me contacter
+              {t.ui.contactMe}
             </a>
           </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-5 text-white/60 text-sm">
             <span className="inline-flex items-center gap-2">
               <MapPin size={14} />
-              {personal.location}
+              {p.location}
             </span>
             <a
               href={personal.github}

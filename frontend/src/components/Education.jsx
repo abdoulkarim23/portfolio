@@ -1,22 +1,22 @@
 import React from "react";
 import { GraduationCap } from "lucide-react";
-import { education } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
 
 const Education = () => {
+  const { t } = useI18n();
+  const section = t.education;
+
   return (
     <section id="education" className="section-padding relative">
       <div className="container-xl">
         <div className="reveal max-w-2xl">
-          <span className="section-eyebrow">// 05 — Académique</span>
-          <h2 className="section-title mt-3">Formation</h2>
-          <p className="mt-4 text-white/65">
-            Cursus ingénieur en mathématiques appliquées, informatique et
-            intelligence artificielle.
-          </p>
+          <span className="section-eyebrow">{section.eyebrow}</span>
+          <h2 className="section-title mt-3">{section.heading}</h2>
+          <p className="mt-4 text-white/65">{section.intro}</p>
         </div>
 
         <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {education.map((e) => (
+          {section.items.map((e) => (
             <div key={e.id} className="card-surface rounded-xl p-6 reveal">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">

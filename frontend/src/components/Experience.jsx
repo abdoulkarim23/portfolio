@@ -1,21 +1,24 @@
 import React from "react";
 import { Briefcase, MapPin, Check } from "lucide-react";
-import { experiences } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
 
 const Experience = () => {
+  const { t } = useI18n();
+  const section = t.experience;
+
   return (
     <section id="experience" className="section-padding relative">
       <div className="container-xl">
         <div className="reveal max-w-2xl">
-          <span className="section-eyebrow">// 02 — Parcours</span>
-          <h2 className="section-title mt-3">Expérience professionnelle</h2>
+          <span className="section-eyebrow">{section.eyebrow}</span>
+          <h2 className="section-title mt-3">{section.heading}</h2>
         </div>
 
         <div className="mt-12 relative">
           <div className="absolute left-[11px] md:left-[15px] top-2 bottom-2 w-px bg-gradient-to-b from-[#38bdf8]/40 via-white/10 to-transparent" />
 
           <div className="space-y-8">
-            {experiences.map((e) => (
+            {section.items.map((e) => (
               <div key={e.id} className="relative pl-10 md:pl-14 reveal">
                 <span className="absolute left-0 top-1.5 w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#07070a] border border-[#38bdf8]/50 grid place-items-center">
                   <Briefcase size={12} className="text-[#38bdf8]" />
@@ -32,7 +35,7 @@ const Experience = () => {
                         )}
                         {e.current && (
                           <span className="mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-emerald-400/30 text-emerald-400 bg-emerald-400/10">
-                            En cours
+                            {t.ui.current}
                           </span>
                         )}
                       </div>

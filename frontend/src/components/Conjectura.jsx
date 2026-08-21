@@ -6,7 +6,7 @@ import {
   Layers,
   Zap,
 } from "lucide-react";
-import { personal, planquia } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
 
 const iconMap = {
   Layers,
@@ -15,6 +15,9 @@ const iconMap = {
 };
 
 const Conjectura = () => {
+  const { personal, t } = useI18n();
+  const section = t.planquia;
+
   return (
     <section id="planquia" className="section-padding relative">
       <div
@@ -31,9 +34,9 @@ const Conjectura = () => {
 
       <div className="container-xl relative">
         <div className="reveal max-w-2xl">
-          <span className="section-eyebrow">// 06 — Produit</span>
-          <h2 className="section-title mt-3">{planquia.heading}</h2>
-          <p className="mt-4 text-white/65">{planquia.intro}</p>
+          <span className="section-eyebrow">{section.eyebrow}</span>
+          <h2 className="section-title mt-3">{section.heading}</h2>
+          <p className="mt-4 text-white/65">{section.intro}</p>
         </div>
 
         <div className="mt-12 grid md:grid-cols-12 gap-6">
@@ -47,14 +50,12 @@ const Conjectura = () => {
                   {personal.company.product}
                 </h3>
                 <p className="mono text-xs text-white/50">
-                  {personal.company.name} · {personal.company.role}
+                  {personal.company.name} · {t.personal.companyRole}
                 </p>
               </div>
             </div>
             <p className="mt-5 text-white/70 text-[15px] leading-relaxed">
-              Des plans PDF de construction aux devis structurés : Planquia
-              automatise l'extraction, le raisonnement et la quotation pour les
-              professionnels du BTP.
+              {section.blurb}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
@@ -63,7 +64,7 @@ const Conjectura = () => {
                 rel="noopener noreferrer"
                 className="btn-primary rounded-md px-4 py-2.5 text-sm inline-flex items-center gap-2 w-fit"
               >
-                Visiter planquia.com
+                {t.ui.visitPlanquia}
                 <ArrowUpRight size={16} />
               </a>
               <a
@@ -79,7 +80,7 @@ const Conjectura = () => {
           </div>
 
           <div className="md:col-span-7 grid gap-4">
-            {planquia.pillars.map((p) => {
+            {section.pillars.map((p) => {
               const Icon = iconMap[p.icon] || Layers;
               return (
                 <div key={p.title} className="card-surface rounded-xl p-6 reveal">

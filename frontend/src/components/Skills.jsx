@@ -7,7 +7,7 @@ import {
   Database,
   Globe,
 } from "lucide-react";
-import { skills, languages } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
 
 const iconMap = {
   Sparkles: Sparkles,
@@ -39,19 +39,18 @@ const SkillCard = ({ skill }) => {
 };
 
 const Skills = () => {
-  const featured = skills.filter((s) => s.featured);
-  const rest = skills.filter((s) => !s.featured);
+  const { t } = useI18n();
+  const section = t.skills;
+  const featured = section.groups.filter((s) => s.featured);
+  const rest = section.groups.filter((s) => !s.featured);
 
   return (
     <section id="skills" className="section-padding relative">
       <div className="container-xl">
         <div className="reveal max-w-2xl">
-          <span className="section-eyebrow">// 04 — Stack</span>
-          <h2 className="section-title mt-3">Compétences techniques</h2>
-          <p className="mt-4 text-white/65">
-            Une stack pensée pour le GenAI de production — y compris le serving
-            local, air-gapped, sur hardware contraint.
-          </p>
+          <span className="section-eyebrow">{section.eyebrow}</span>
+          <h2 className="section-title mt-3">{section.heading}</h2>
+          <p className="mt-4 text-white/65">{section.intro}</p>
         </div>
 
         <div className="mt-12 grid md:grid-cols-2 gap-5">
@@ -72,14 +71,12 @@ const Skills = () => {
               <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">
                 <Globe size={18} />
               </div>
-              <h3 className="text-white font-medium">Langues</h3>
+              <h3 className="text-white font-medium">{section.languagesTitle}</h3>
             </div>
-            <p className="mt-3 text-white/55 text-sm">
-              Communication fluide en contexte international et défense.
-            </p>
+            <p className="mt-3 text-white/55 text-sm">{section.languagesIntro}</p>
           </div>
           <div className="md:col-span-8 grid sm:grid-cols-2 gap-4">
-            {languages.map((l) => (
+            {section.spoken.map((l) => (
               <div key={l.name} className="card-surface rounded-lg p-4">
                 <div className="flex items-baseline justify-between">
                   <span className="text-white">{l.name}</span>
