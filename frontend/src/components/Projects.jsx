@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Github, ArrowUpRight, Lock } from "lucide-react";
-import { projects } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
 
 const Projects = () => {
+  const { personal, t } = useI18n();
+  const section = t.projects;
   const [hovered, setHovered] = useState(null);
 
   return (
@@ -10,25 +12,22 @@ const Projects = () => {
       <div className="container-xl">
         <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-6 max-w-none">
           <div className="max-w-2xl">
-            <span className="section-eyebrow">// 03 — Réalisations</span>
-            <h2 className="section-title mt-3">Projets sélectionnés</h2>
-            <p className="mt-4 text-white/65">
-              RAG de production, serving on-premise et produit SaaS — les
-              systèmes que j'ai réellement déployés.
-            </p>
+            <span className="section-eyebrow">{section.eyebrow}</span>
+            <h2 className="section-title mt-3">{section.heading}</h2>
+            <p className="mt-4 text-white/65">{section.intro}</p>
           </div>
           <a
-            href="https://github.com/abdoulkarim23"
+            href={personal.github}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-outline rounded-md px-4 py-2 text-sm inline-flex items-center gap-2 w-fit"
           >
-            <Github size={16} /> Tous les repos
+            <Github size={16} /> {t.ui.allRepos}
           </a>
         </div>
 
         <div className="mt-12 grid md:grid-cols-2 gap-5">
-          {projects.map((p, idx) => (
+          {section.items.map((p, idx) => (
             <article
               key={p.id}
               onMouseEnter={() => setHovered(idx)}
@@ -54,12 +53,12 @@ const Projects = () => {
                     </span>
                     {p.featured && (
                       <span className="mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-[#38bdf8]/30 text-[#38bdf8] bg-[#38bdf8]/10">
-                        Flagship
+                        {t.ui.flagship}
                       </span>
                     )}
                     {p.confidential && (
                       <span className="inline-flex items-center gap-1 mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/10 text-white/50">
-                        <Lock size={10} /> Confidentiel
+                        <Lock size={10} /> {t.ui.confidential}
                       </span>
                     )}
                   </div>
@@ -73,7 +72,7 @@ const Projects = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-8 h-8 rounded-md border border-white/10 grid place-items-center text-white/60 hover:text-white hover:border-[#38bdf8]/60 transition shrink-0"
-                    aria-label={`Ouvrir ${p.title}`}
+                    aria-label={`${t.ui.openProject} ${p.title}`}
                   >
                     <ArrowUpRight size={16} />
                   </a>
@@ -110,9 +109,9 @@ const Projects = () => {
               </ul>
 
               <div className="mt-5 flex flex-wrap gap-2">
-                {p.tags.map((t) => (
-                  <span key={t} className="chip">
-                    {t}
+                {p.tags.map((tag) => (
+                  <span key={tag} className="chip">
+                    {tag}
                   </span>
                 ))}
               </div>

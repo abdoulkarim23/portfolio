@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { navLinks, personal } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
+import LangToggle from "./LangToggle";
 
 const Navbar = () => {
+  const { personal, t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -20,8 +22,8 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="container-xl flex items-center justify-between h-16">
-        <a href="#top" className="flex items-center gap-2 group">
+      <div className="container-xl flex items-center justify-between h-16 gap-3">
+        <a href="#top" className="flex items-center gap-2 group shrink-0">
           <span className="w-8 h-8 rounded-md bg-white text-[#0b0b10] grid place-items-center font-semibold mono">
             {personal.initials}
           </span>
@@ -31,34 +33,40 @@ const Navbar = () => {
           </span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-7">
-          {navLinks.map((l) => (
+        <nav className="hidden lg:flex items-center gap-5">
+          {t.navLinks.map((l) => (
             <a key={l.href} href={l.href} className="nav-link text-sm">
               {l.label}
             </a>
           ))}
         </nav>
 
-        <a
-          href="#contact"
-          className="hidden md:inline-flex btn-primary rounded-md px-4 py-2 text-sm font-medium"
-        >
-          Me contacter
-        </a>
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <LangToggle />
+          <a
+            href="#contact"
+            className="btn-primary rounded-md px-4 py-2 text-sm font-medium"
+          >
+            {t.ui.contactMe}
+          </a>
+        </div>
 
-        <button
-          className="md:hidden text-white"
-          aria-label="Ouvrir le menu"
-          onClick={() => setOpen((o) => !o)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="flex lg:hidden items-center gap-2">
+          <LangToggle />
+          <button
+            className="text-white"
+            aria-label={open ? t.ui.closeMenu : t.ui.openMenu}
+            onClick={() => setOpen((o) => !o)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-white/5 bg-[#07070a]/95 backdrop-blur-xl">
+        <div className="lg:hidden border-t border-white/5 bg-[#07070a]/95 backdrop-blur-xl">
           <div className="container-xl py-4 flex flex-col gap-4">
-            {navLinks.map((l) => (
+            {t.navLinks.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
@@ -73,7 +81,7 @@ const Navbar = () => {
               onClick={() => setOpen(false)}
               className="btn-primary rounded-md px-4 py-2 text-sm text-center"
             >
-              Me contacter
+              {t.ui.contactMe}
             </a>
           </div>
         </div>

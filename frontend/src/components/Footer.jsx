@@ -1,8 +1,9 @@
 import React from "react";
 import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
-import { personal } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
 
 const Footer = () => {
+  const { personal, t } = useI18n();
   const year = new Date().getFullYear();
   return (
     <footer className="relative border-t border-white/5 mt-8">
@@ -18,44 +19,31 @@ const Footer = () => {
             </span>
           </div>
           <p className="mt-4 text-white/55 text-sm max-w-sm">
-            Ingénieur IA/ML — GenAI de production, RAG et déploiement on-premise.
-            Basé à Paris.
+            {t.personal.footerBlurb}
           </p>
         </div>
 
         <div className="md:col-span-3">
-          <h4 className="text-white/80 text-sm mono">NAVIGATION</h4>
+          <h4 className="text-white/80 text-sm mono">{t.ui.navLabel}</h4>
           <ul className="mt-3 space-y-2 text-sm">
-            <li>
-              <a href="#about" className="nav-link">
-                À propos
-              </a>
-            </li>
-            <li>
-              <a href="#experience" className="nav-link">
-                Expérience
-              </a>
-            </li>
-            <li>
-              <a href="#projects" className="nav-link">
-                Projets
-              </a>
-            </li>
-            <li>
-              <a href="#planquia" className="nav-link">
-                Planquia
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="nav-link">
-                Contact
-              </a>
-            </li>
+            {t.navLinks
+              .filter((l) =>
+                ["#about", "#experience", "#projects", "#planquia", "#contact"].includes(
+                  l.href
+                )
+              )
+              .map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="nav-link">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
           </ul>
         </div>
 
         <div className="md:col-span-4">
-          <h4 className="text-white/80 text-sm mono">AILLEURS</h4>
+          <h4 className="text-white/80 text-sm mono">{t.ui.elsewhere}</h4>
           <div className="mt-3 flex flex-col gap-2 text-sm">
             <a
               className="nav-link inline-flex items-center gap-2"
@@ -102,9 +90,9 @@ const Footer = () => {
       <div className="border-t border-white/5">
         <div className="container-xl py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/45">
           <span>
-            © {year} {personal.name}. Tous droits réservés.
+            © {year} {personal.name}. {t.ui.rights}
           </span>
-          <span className="mono">Conçu & développé avec rigueur • Paris</span>
+          <span className="mono">{t.ui.crafted}</span>
         </div>
       </div>
     </footer>

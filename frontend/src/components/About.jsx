@@ -1,12 +1,15 @@
 import React from "react";
-import { about } from "../mock";
+import { useI18n } from "../i18n/LanguageContext";
 
 const About = () => {
+  const { t } = useI18n();
+  const about = t.about;
+
   return (
     <section id="about" className="section-padding relative">
       <div className="container-xl">
         <div className="reveal max-w-2xl">
-          <span className="section-eyebrow">// 01 — Profil</span>
+          <span className="section-eyebrow">{about.eyebrow}</span>
           <h2 className="section-title mt-3">{about.heading}</h2>
         </div>
 
@@ -20,10 +23,7 @@ const About = () => {
           <div className="md:col-span-5 reveal">
             <div className="grid grid-cols-2 gap-4">
               {about.highlights.map((h) => (
-                <div
-                  key={h.label}
-                  className="card-surface rounded-lg p-5"
-                >
+                <div key={h.label} className="card-surface rounded-lg p-5">
                   <div className="mono text-2xl md:text-3xl text-white font-semibold">
                     {h.value}
                   </div>

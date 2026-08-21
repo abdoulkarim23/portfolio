@@ -59,9 +59,11 @@ Chaque push sur `main` déclenche le build et le déploiement vers la branche `g
 
 ## Modifier le contenu
 
-Tout le contenu (expérience, projets, compétences, textes) est centralisé dans :
+Le contenu (expérience, projets, compétences, textes FR/EN) est centralisé dans :
 
 `frontend/src/mock.js`
+
+Le bouton **FR | EN** dans la barre de navigation bascule toute la page. Le choix est mémorisé dans le navigateur.
 
 ---
 
