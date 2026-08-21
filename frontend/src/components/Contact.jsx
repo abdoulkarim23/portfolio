@@ -12,7 +12,8 @@ import {
 import { personal } from "../mock";
 import { useToast } from "../hooks/use-toast";
 
-const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${personal.email}`;
+const FORMSUBMIT_URL =
+  "https://formsubmit.co/ajax/5f89ddc9d69312d3a3a5d9e709830ec8";
 
 const emptyForm = { name: "", email: "", message: "", website: "" };
 
