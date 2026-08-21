@@ -18,34 +18,81 @@ const Footer = () => {
             </span>
           </div>
           <p className="mt-4 text-white/55 text-sm max-w-sm">
-            Ingénieur ML/GenAI/RAG — basé à Paris. Toujours curieux de nouveaux
-            défis autour des LLMs et de la donnée.
+            Ingénieur IA/ML — GenAI de production, RAG et déploiement on-premise.
+            Basé à Paris.
           </p>
         </div>
 
         <div className="md:col-span-3">
           <h4 className="text-white/80 text-sm mono">NAVIGATION</h4>
           <ul className="mt-3 space-y-2 text-sm">
-            <li><a href="#about" className="nav-link">À propos</a></li>
-            <li><a href="#projects" className="nav-link">Projets</a></li>
-            <li><a href="#experience" className="nav-link">Expérience</a></li>
-            <li><a href="#contact" className="nav-link">Contact</a></li>
+            <li>
+              <a href="#about" className="nav-link">
+                À propos
+              </a>
+            </li>
+            <li>
+              <a href="#experience" className="nav-link">
+                Expérience
+              </a>
+            </li>
+            <li>
+              <a href="#projects" className="nav-link">
+                Projets
+              </a>
+            </li>
+            <li>
+              <a href="#planquia" className="nav-link">
+                Planquia
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className="nav-link">
+                Contact
+              </a>
+            </li>
           </ul>
         </div>
 
         <div className="md:col-span-4">
           <h4 className="text-white/80 text-sm mono">AILLEURS</h4>
           <div className="mt-3 flex flex-col gap-2 text-sm">
-            <a className="nav-link inline-flex items-center gap-2" href={personal.github} target="_blank" rel="noopener noreferrer">
+            <a
+              className="nav-link inline-flex items-center gap-2"
+              href={personal.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Github size={14} /> github.com/abdoulkarim23
             </a>
-            <a className="nav-link inline-flex items-center gap-2" href={personal.linkedin} target="_blank" rel="noopener noreferrer">
+            <a
+              className="nav-link inline-flex items-center gap-2"
+              href={personal.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Linkedin size={14} /> LinkedIn
             </a>
-            <a className="nav-link inline-flex items-center gap-2" href={personal.company.url} target="_blank" rel="noopener noreferrer">
+            <a
+              className="nav-link inline-flex items-center gap-2"
+              href={personal.planquia}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ArrowUp size={14} className="rotate-45" /> planquia.com
+            </a>
+            <a
+              className="nav-link inline-flex items-center gap-2"
+              href={personal.company.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <ArrowUp size={14} className="rotate-45" /> conjectura.fr
             </a>
-            <a className="nav-link inline-flex items-center gap-2" href={`mailto:${personal.email}`}>
+            <a
+              className="nav-link inline-flex items-center gap-2"
+              href={`mailto:${personal.email}`}
+            >
               <Mail size={14} /> {personal.email}
             </a>
           </div>
@@ -54,7 +101,9 @@ const Footer = () => {
 
       <div className="border-t border-white/5">
         <div className="container-xl py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/45">
-          <span>© {year} {personal.name}. Tous droits réservés.</span>
+          <span>
+            © {year} {personal.name}. Tous droits réservés.
+          </span>
           <span className="mono">Conçu & développé avec rigueur • Paris</span>
         </div>
       </div>

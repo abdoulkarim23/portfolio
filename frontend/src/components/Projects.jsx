@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import { Github, ArrowUpRight, Lock } from "lucide-react";
 import { projects } from "../mock";
 
 const Projects = () => {
@@ -10,10 +10,11 @@ const Projects = () => {
       <div className="container-xl">
         <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-6 max-w-none">
           <div className="max-w-2xl">
-            <span className="section-eyebrow">// 04 — Réalisations</span>
+            <span className="section-eyebrow">// 03 — Réalisations</span>
             <h2 className="section-title mt-3">Projets sélectionnés</h2>
             <p className="mt-4 text-white/65">
-              Une sélection de projets RAG, data et IA.
+              RAG de production, serving on-premise et produit SaaS — les
+              systèmes que j'ai réellement déployés.
             </p>
           </div>
           <a
@@ -26,15 +27,16 @@ const Projects = () => {
           </a>
         </div>
 
-        <div className="mt-12 grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+        <div className="mt-12 grid md:grid-cols-2 gap-5">
           {projects.map((p, idx) => (
             <article
               key={p.id}
               onMouseEnter={() => setHovered(idx)}
               onMouseLeave={() => setHovered(null)}
-              className="card-surface rounded-xl p-6 group relative overflow-hidden reveal"
+              className={`card-surface rounded-xl p-6 group relative overflow-hidden reveal ${
+                p.featured ? "md:col-span-2" : ""
+              }`}
             >
-              {/* accent line */}
               <div
                 className="absolute inset-x-0 top-0 h-px transition-opacity"
                 style={{
@@ -46,27 +48,57 @@ const Projects = () => {
 
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <div className="mono text-xs text-white/45">
-                    {p.subtitle} • {p.year}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="mono text-xs text-white/45">
+                      {p.subtitle} • {p.year}
+                    </span>
+                    {p.featured && (
+                      <span className="mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-[#38bdf8]/30 text-[#38bdf8] bg-[#38bdf8]/10">
+                        Flagship
+                      </span>
+                    )}
+                    {p.confidential && (
+                      <span className="inline-flex items-center gap-1 mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-white/10 text-white/50">
+                        <Lock size={10} /> Confidentiel
+                      </span>
+                    )}
                   </div>
                   <h3 className="text-white text-lg font-medium mt-2 leading-tight">
                     {p.title}
                   </h3>
                 </div>
-                <a
-                  href={p.repo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-md border border-white/10 grid place-items-center text-white/60 hover:text-white hover:border-[#38bdf8]/60 transition"
-                  aria-label="Voir le repo"
-                >
-                  <ArrowUpRight size={16} />
-                </a>
+                {p.url && (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-md border border-white/10 grid place-items-center text-white/60 hover:text-white hover:border-[#38bdf8]/60 transition shrink-0"
+                    aria-label={`Ouvrir ${p.title}`}
+                  >
+                    <ArrowUpRight size={16} />
+                  </a>
+                )}
               </div>
 
-              <p className="mt-4 text-white/65 text-sm leading-relaxed">
+              <p className="mt-4 text-white/65 text-sm leading-relaxed max-w-3xl">
                 {p.summary}
               </p>
+
+              {p.metrics && (
+                <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl">
+                  {p.metrics.map((m) => (
+                    <div
+                      key={m.label}
+                      className="rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2.5"
+                    >
+                      <div className="mono text-white text-sm">{m.value}</div>
+                      <div className="text-white/45 text-[11px] mt-0.5">
+                        {m.label}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               <ul className="mt-4 space-y-1.5">
                 {p.bullets.map((b, i) => (
@@ -79,7 +111,9 @@ const Projects = () => {
 
               <div className="mt-5 flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <span key={t} className="chip">{t}</span>
+                  <span key={t} className="chip">
+                    {t}
+                  </span>
                 ))}
               </div>
             </article>

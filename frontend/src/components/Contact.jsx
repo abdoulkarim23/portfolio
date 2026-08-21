@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Mail, MapPin, Phone, Github, Linkedin, Send, ArrowUpRight } from "lucide-react";
+import {
+  Mail,
+  MapPin,
+  Phone,
+  Github,
+  Linkedin,
+  Send,
+  ArrowUpRight,
+} from "lucide-react";
 import { personal } from "../mock";
 import { useToast } from "../hooks/use-toast";
 
@@ -21,18 +29,18 @@ const Contact = () => {
       return;
     }
     setLoading(true);
-    // Mock: save to localStorage
+    const subject = encodeURIComponent(`Portfolio — message de ${form.name}`);
+    const body = encodeURIComponent(
+      `${form.message}\n\n— ${form.name}\n${form.email}`
+    );
+    window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
     setTimeout(() => {
-      const inbox = JSON.parse(localStorage.getItem("contact_inbox") || "[]");
-      inbox.unshift({ ...form, at: new Date().toISOString() });
-      localStorage.setItem("contact_inbox", JSON.stringify(inbox));
-      setForm({ name: "", email: "", message: "" });
       setLoading(false);
       toast({
-        title: "Message envoyé • (mock)",
-        description: "Merci ! Je reviens vers toi très vite.",
+        title: "Client mail ouvert",
+        description: "Votre message est prêt à être envoyé.",
       });
-    }, 700);
+    }, 400);
   };
 
   return (
@@ -42,8 +50,9 @@ const Contact = () => {
           <span className="section-eyebrow">// 07 — Entrons en contact</span>
           <h2 className="section-title mt-3">Discutons de votre projet</h2>
           <p className="mt-4 text-white/65">
-            Je suis ouvert aux opportunités d'alternance à partir de septembre
-            2026, ainsi qu'aux collaborations freelance via Conjectura.
+            Un système RAG à industrialiser, un déploiement on-premise, une
+            collaboration autour de Planquia — écrivez-moi, je lis chaque
+            message.
           </p>
         </div>
 
@@ -62,7 +71,10 @@ const Contact = () => {
                   <div className="text-white text-sm">{personal.email}</div>
                 </div>
               </div>
-              <ArrowUpRight className="text-white/40 group-hover:text-white transition" size={16} />
+              <ArrowUpRight
+                className="text-white/40 group-hover:text-white transition"
+                size={16}
+              />
             </a>
 
             <a
@@ -78,7 +90,10 @@ const Contact = () => {
                   <div className="text-white text-sm">{personal.phone}</div>
                 </div>
               </div>
-              <ArrowUpRight className="text-white/40 group-hover:text-white transition" size={16} />
+              <ArrowUpRight
+                className="text-white/40 group-hover:text-white transition"
+                size={16}
+              />
             </a>
 
             <div className="card-surface rounded-xl p-5 flex items-center gap-4">
@@ -117,8 +132,11 @@ const Contact = () => {
           >
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs text-white/55 mono">NOM</label>
+                <label className="text-xs text-white/55 mono" htmlFor="name">
+                  NOM
+                </label>
                 <input
+                  id="name"
                   name="name"
                   value={form.name}
                   onChange={onChange}
@@ -127,8 +145,11 @@ const Contact = () => {
                 />
               </div>
               <div>
-                <label className="text-xs text-white/55 mono">EMAIL</label>
+                <label className="text-xs text-white/55 mono" htmlFor="email">
+                  EMAIL
+                </label>
                 <input
+                  id="email"
                   name="email"
                   type="email"
                   value={form.email}
@@ -139,8 +160,11 @@ const Contact = () => {
               </div>
             </div>
             <div className="mt-4">
-              <label className="text-xs text-white/55 mono">MESSAGE</label>
+              <label className="text-xs text-white/55 mono" htmlFor="message">
+                MESSAGE
+              </label>
               <textarea
+                id="message"
                 name="message"
                 value={form.message}
                 onChange={onChange}
@@ -151,14 +175,14 @@ const Contact = () => {
             </div>
             <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">
               <p className="text-xs text-white/45">
-                Réponse sous 24–48h — je lis chaque message.
+                Réponse sous 24–48h — le formulaire ouvre votre client mail.
               </p>
               <button
                 type="submit"
                 disabled={loading}
                 className="btn-primary rounded-md px-5 py-2.5 text-sm font-medium inline-flex items-center gap-2 disabled:opacity-60"
               >
-                {loading ? "Envoi…" : "Envoyer le message"}
+                {loading ? "Ouverture…" : "Envoyer le message"}
                 <Send size={14} />
               </button>
             </div>

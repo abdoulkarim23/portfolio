@@ -9,6 +9,10 @@ const Education = () => {
         <div className="reveal max-w-2xl">
           <span className="section-eyebrow">// 05 — Académique</span>
           <h2 className="section-title mt-3">Formation</h2>
+          <p className="mt-4 text-white/65">
+            Cursus ingénieur en mathématiques appliquées, informatique et
+            intelligence artificielle.
+          </p>
         </div>
 
         <div className="mt-12 grid md:grid-cols-3 gap-5">

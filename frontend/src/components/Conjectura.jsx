@@ -1,28 +1,22 @@
 import React from "react";
-import { Building2, ArrowUpRight, ShieldCheck, Layers, Zap } from "lucide-react";
-import { personal } from "../mock";
+import {
+  Building2,
+  ArrowUpRight,
+  ShieldCheck,
+  Layers,
+  Zap,
+} from "lucide-react";
+import { personal, planquia } from "../mock";
 
-const pillars = [
-  {
-    icon: Layers,
-    title: "Expertise data & IA",
-    text: "Conception d'architectures RAG, assistants IA et pipelines de données sur mesure.",
-  },
-  {
-    icon: Zap,
-    title: "Mise en production",
-    text: "Du POC à l'industrialisation : cloud, monitoring, évaluation et déploiement.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Fiabilité & rigueur",
-    text: "Qualité du code, benchmarks et bonnes pratiques MLOps au cœur des livrables.",
-  },
-];
+const iconMap = {
+  Layers,
+  Zap,
+  ShieldCheck,
+};
 
 const Conjectura = () => {
   return (
-    <section id="conjectura" className="section-padding relative">
+    <section id="planquia" className="section-padding relative">
       <div
         className="accent-glow"
         style={{
@@ -37,12 +31,9 @@ const Conjectura = () => {
 
       <div className="container-xl relative">
         <div className="reveal max-w-2xl">
-          <span className="section-eyebrow">// 06 — Partenariat</span>
-          <h2 className="section-title mt-3">Conjectura — entreprise partenaire</h2>
-          <p className="mt-4 text-white/65">
-            Je collabore avec Conjectura pour concevoir et déployer des solutions
-            data et IA pour des clients ambitieux.
-          </p>
+          <span className="section-eyebrow">// 06 — Produit</span>
+          <h2 className="section-title mt-3">{planquia.heading}</h2>
+          <p className="mt-4 text-white/65">{planquia.intro}</p>
         </div>
 
         <div className="mt-12 grid md:grid-cols-12 gap-6">
@@ -52,29 +43,44 @@ const Conjectura = () => {
                 <Building2 size={18} />
               </div>
               <div>
-                <h3 className="text-white font-medium">{personal.company.name}</h3>
-                <p className="mono text-xs text-white/50">{personal.company.role}</p>
+                <h3 className="text-white font-medium">
+                  {personal.company.product}
+                </h3>
+                <p className="mono text-xs text-white/50">
+                  {personal.company.name} · {personal.company.role}
+                </p>
               </div>
             </div>
             <p className="mt-5 text-white/70 text-[15px] leading-relaxed">
-              Une structure agile qui réunit data scientists et ingénieurs IA pour
-              transformer des idées en produits concrets. J'y mets en pratique mon
-              expertise RAG / LLM sur des projets clients.
+              Des plans PDF de construction aux devis structurés : Planquia
+              automatise l'extraction, le raisonnement et la quotation pour les
+              professionnels du BTP.
             </p>
-            <a
-              href={personal.company.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 btn-primary rounded-md px-4 py-2.5 text-sm inline-flex items-center gap-2 w-fit"
-            >
-              Visiter conjectura.fr
-              <ArrowUpRight size={16} />
-            </a>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href={personal.planquia}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary rounded-md px-4 py-2.5 text-sm inline-flex items-center gap-2 w-fit"
+              >
+                Visiter planquia.com
+                <ArrowUpRight size={16} />
+              </a>
+              <a
+                href={personal.company.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline rounded-md px-4 py-2.5 text-sm inline-flex items-center gap-2 w-fit"
+              >
+                conjectura.fr
+                <ArrowUpRight size={16} />
+              </a>
+            </div>
           </div>
 
           <div className="md:col-span-7 grid gap-4">
-            {pillars.map((p) => {
-              const Icon = p.icon;
+            {planquia.pillars.map((p) => {
+              const Icon = iconMap[p.icon] || Layers;
               return (
                 <div key={p.title} className="card-surface rounded-xl p-6 reveal">
                   <div className="flex gap-4">
