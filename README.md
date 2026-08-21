@@ -47,7 +47,7 @@ Avec `homepage` configuré pour GitHub Pages, l'app est servie sur [http://local
 
 Le formulaire envoie les messages automatiquement vers `arkam.ali_pro@outlook.com` via [FormSubmit](https://formsubmit.co) (site statique, pas de backend).
 
-**Activation (une seule fois)** : après le déploiement, remplis le formulaire toi-même depuis le site en ligne. FormSubmit t'envoie un mail de confirmation — clique le lien (vérifie aussi les spams). Ensuite, chaque visiteur te fait arriver un vrai email, avec Reply-To sur son adresse.
+**Activation (une seule fois)** : clique **ACTIVATE FORM** dans le mail FormSubmit. Le formulaire utilise ensuite la clé `5f89ddc9d69312d3a3a5d9e709830ec8` (l'email n'apparaît plus dans le code). Chaque visiteur te fait arriver un vrai email, avec Reply-To sur son adresse.
 
 ---
 
