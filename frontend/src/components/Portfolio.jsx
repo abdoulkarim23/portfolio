@@ -2,16 +2,15 @@ import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
 import About from "./About";
-import Skills from "./Skills";
 import Experience from "./Experience";
 import Projects from "./Projects";
+import Skills from "./Skills";
 import Education from "./Education";
 import Conjectura from "./Conjectura";
 import Contact from "./Contact";
 import Footer from "./Footer";
 
 const Portfolio = () => {
-  // Reveal on scroll
   useEffect(() => {
     const els = document.querySelectorAll(".reveal");
     const obs = new IntersectionObserver(
@@ -35,9 +34,9 @@ const Portfolio = () => {
       <main>
         <Hero />
         <About />
-        <Skills />
         <Experience />
         <Projects />
+        <Skills />
         <Education />
         <Conjectura />
         <Contact />

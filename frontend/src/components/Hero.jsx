@@ -1,11 +1,10 @@
 import React from "react";
-import { ArrowRight, Github, Linkedin, Mail, MapPin } from "lucide-react";
-import { personal } from "../mock";
+import { ArrowRight, Github, Linkedin, Mail, MapPin, ExternalLink } from "lucide-react";
+import { personal, heroStats } from "../mock";
 
 const Hero = () => {
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-36 pb-20 md:pb-28">
-      {/* Background layers */}
       <div className="absolute inset-0 grid-bg" />
       <div
         className="accent-glow floaty"
@@ -37,8 +36,10 @@ const Hero = () => {
             {personal.status}
           </div>
 
-          <h1 className="font-semibold text-white leading-[1.02] tracking-tight"
-              style={{ fontSize: "clamp(2.4rem, 6vw, 4.5rem)" }}>
+          <h1
+            className="font-semibold text-white leading-[1.02] tracking-tight"
+            style={{ fontSize: "clamp(2.4rem, 6vw, 4.5rem)" }}
+          >
             {personal.name}
             <span className="text-[#38bdf8]">.</span>
           </h1>
@@ -51,6 +52,14 @@ const Hero = () => {
           <p className="mt-6 text-white/70 max-w-2xl text-base md:text-lg leading-relaxed">
             {personal.tagline}
           </p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {personal.chips.map((chip) => (
+              <span key={chip} className="chip">
+                {chip}
+              </span>
+            ))}
+          </div>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a
@@ -92,10 +101,18 @@ const Hero = () => {
               <Linkedin size={14} />
               LinkedIn
             </a>
+            <a
+              href={personal.planquia}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 nav-link"
+            >
+              <ExternalLink size={14} />
+              planquia.com
+            </a>
           </div>
         </div>
 
-        {/* Terminal card */}
         <div className="md:col-span-4">
           <div className="relative card-surface rounded-xl p-4 shadow-2xl">
             <div className="flex items-center gap-1.5 pb-3 border-b border-white/5">
@@ -111,19 +128,30 @@ const Hero = () => {
 Arkam ALI
 
 $ cat role.txt
-ML / GenAI / RAG Engineer
+AI/ML Engineer
+Production GenAI · RAG
 
 $ ls ./stack
-python  pytorch  faiss
-huggingface  fastapi  docker
-gcp  azure  bigquery
+python  vllm  faiss
+mistral  fastapi  docker
 
 $ ./run.sh --mission
-> Déployer des assistants IA
-  en environnement réel.`}
+> Serving LLM on-premise
+  air-gapped, no cloud.`}
             </pre>
           </div>
         </div>
+      </div>
+
+      <div className="container-xl relative z-10 mt-14 grid grid-cols-2 md:grid-cols-4 gap-3">
+        {heroStats.map((stat) => (
+          <div key={stat.label} className="card-surface rounded-lg px-4 py-4">
+            <div className="mono text-white text-sm md:text-base font-medium">
+              {stat.value}
+            </div>
+            <div className="text-white/50 text-[11px] mt-1">{stat.label}</div>
+          </div>
+        ))}
       </div>
     </section>
   );

@@ -6,10 +6,13 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,8 +20,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: "18"
+          cache: "npm"
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
@@ -27,6 +30,8 @@ jobs:
 
       - name: Build project
         working-directory: ./frontend
+        env:
+          PUBLIC_URL: /portfolio
         run: npm run build
 
       - name: Deploy to GitHub Pages
@@ -35,3 +40,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend/build
           publish_branch: gh-pages
+          enable_jekyll: false
