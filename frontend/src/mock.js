@@ -28,13 +28,6 @@ export const personal = {
   ],
 };
 
-export const heroStats = [
-  { label: "Hit@1 NCORE AI", value: "19% → 31%" },
-  { label: "Latence / document", value: "~22s" },
-  { label: "Infra", value: "NVIDIA DGX" },
-  { label: "Contexte", value: "Air-gapped" },
-];
-
 export const about = {
   heading: "Des systèmes GenAI qui tiennent en production",
   paragraphs: [
