@@ -7,40 +7,76 @@ import {
   Linkedin,
   Send,
   ArrowUpRight,
+  CheckCircle2,
 } from "lucide-react";
 import { personal } from "../mock";
 import { useToast } from "../hooks/use-toast";
 
+const FORMSUBMIT_URL = `https://formsubmit.co/ajax/${personal.email}`;
+
+const emptyForm = { name: "", email: "", message: "", website: "" };
+
 const Contact = () => {
   const { toast } = useToast();
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState(emptyForm);
   const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const onChange = (e) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
+    if (form.website) return;
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast({
         title: "Champs manquants",
         description: "Merci de remplir tous les champs avant d'envoyer.",
       });
       return;
     }
+
     setLoading(true);
-    const subject = encodeURIComponent(`Portfolio — message de ${form.name}`);
-    const body = encodeURIComponent(
-      `${form.message}\n\n— ${form.name}\n${form.email}`
-    );
-    window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
-    setTimeout(() => {
-      setLoading(false);
-      toast({
-        title: "Client mail ouvert",
-        description: "Votre message est prêt à être envoyé.",
+    try {
+      const res = await fetch(FORMSUBMIT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+          _subject: `Portfolio — message de ${form.name.trim()}`,
+          _template: "table",
+          _captcha: "false",
+        }),
       });
-    }, 400);
+
+      const data = await res.json().catch(() => ({}));
+      const failed =
+        !res.ok || data.success === false || data.success === "false";
+      if (failed) {
+        throw new Error(data.message || "Envoi impossible");
+      }
+
+      setSent(true);
+      setForm(emptyForm);
+      toast({
+        title: "Message envoyé",
+        description: "Merci — je vous réponds sous 24–48h.",
+      });
+    } catch {
+      toast({
+        title: "Envoi impossible",
+        description:
+          "Réessayez dans un instant, ou écrivez-moi directement par email.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -126,67 +162,106 @@ const Contact = () => {
             </div>
           </div>
 
-          <form
-            onSubmit={onSubmit}
-            className="md:col-span-7 card-surface rounded-xl p-6 md:p-8 reveal"
-          >
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="text-xs text-white/55 mono" htmlFor="name">
-                  NOM
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  value={form.name}
-                  onChange={onChange}
-                  placeholder="Votre nom"
-                  className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#38bdf8]/60"
-                />
+          {sent ? (
+            <div className="md:col-span-7 card-surface rounded-xl p-6 md:p-8 reveal flex flex-col items-start justify-center min-h-[280px]">
+              <div className="w-10 h-10 rounded-lg bg-emerald-400/10 border border-emerald-400/30 grid place-items-center text-emerald-400">
+                <CheckCircle2 size={20} />
               </div>
-              <div>
-                <label className="text-xs text-white/55 mono" htmlFor="email">
-                  EMAIL
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={form.email}
-                  onChange={onChange}
-                  placeholder="vous@exemple.com"
-                  className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#38bdf8]/60"
-                />
-              </div>
-            </div>
-            <div className="mt-4">
-              <label className="text-xs text-white/55 mono" htmlFor="message">
-                MESSAGE
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={form.message}
-                onChange={onChange}
-                rows={6}
-                placeholder="Parlez-moi de votre projet, contexte, besoin…"
-                className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#38bdf8]/60 resize-none"
-              />
-            </div>
-            <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">
-              <p className="text-xs text-white/45">
-                Réponse sous 24–48h — le formulaire ouvre votre client mail.
+              <h3 className="mt-4 text-white text-lg font-medium">
+                Message bien envoyé
+              </h3>
+              <p className="mt-2 text-white/65 text-sm leading-relaxed max-w-md">
+                Merci. Je reviens vers vous sous 24–48h à l'adresse indiquée.
               </p>
               <button
-                type="submit"
-                disabled={loading}
-                className="btn-primary rounded-md px-5 py-2.5 text-sm font-medium inline-flex items-center gap-2 disabled:opacity-60"
+                type="button"
+                onClick={() => setSent(false)}
+                className="mt-6 btn-outline rounded-md px-4 py-2.5 text-sm"
               >
-                {loading ? "Ouverture…" : "Envoyer le message"}
-                <Send size={14} />
+                Envoyer un autre message
               </button>
             </div>
-          </form>
+          ) : (
+            <form
+              onSubmit={onSubmit}
+              className="md:col-span-7 card-surface rounded-xl p-6 md:p-8 reveal"
+            >
+              <div
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+              >
+                <label htmlFor="website">Site web</label>
+                <input
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={onChange}
+                />
+              </div>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs text-white/55 mono" htmlFor="name">
+                    NOM
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    value={form.name}
+                    onChange={onChange}
+                    required
+                    placeholder="Votre nom"
+                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#38bdf8]/60"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs text-white/55 mono" htmlFor="email">
+                    EMAIL
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={form.email}
+                    onChange={onChange}
+                    required
+                    placeholder="vous@exemple.com"
+                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#38bdf8]/60"
+                  />
+                </div>
+              </div>
+              <div className="mt-4">
+                <label className="text-xs text-white/55 mono" htmlFor="message">
+                  MESSAGE
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={form.message}
+                  onChange={onChange}
+                  required
+                  rows={6}
+                  placeholder="Parlez-moi de votre projet, contexte, besoin…"
+                  className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#38bdf8]/60 resize-none"
+                />
+              </div>
+              <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">
+                <p className="text-xs text-white/45">
+                  Réponse sous 24–48h — le message m'arrive directement par
+                  email.
+                </p>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn-primary rounded-md px-5 py-2.5 text-sm font-medium inline-flex items-center gap-2 disabled:opacity-60"
+                >
+                  {loading ? "Envoi…" : "Envoyer le message"}
+                  <Send size={14} />
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </section>
