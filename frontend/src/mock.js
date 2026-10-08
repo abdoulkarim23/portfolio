@@ -75,7 +75,7 @@ export const copy = {
       tagline:
         "Je conçois et déploie des systèmes GenAI de production — RAG, recherche sémantique et serving de LLMs — y compris on-premise et air-gapped, sans dépendance cloud.",
       location: "Paris, France",
-      status: "Stage HENSOLDT (Allemagne) • GenAI on-premise",
+      status: "Co-fondateur & CTO, Conjectura • GenAI on-premise",
       companyRole: "Co-fondateur & CTO",
       chips: [
         "Production GenAI",
@@ -110,9 +110,9 @@ export const copy = {
           role: "Software Engineer — AI",
           kind: "Stage international",
           company: "HENSOLDT",
-          period: "Juin — Sept. 2026",
+          period: "Juin — début sept. 2026",
           location: "Fürstenfeldbruck, Allemagne",
-          current: true,
+          current: false,
           description:
             "Conception et déploiement de NCORE AI, un système RAG de bout en bout pour l'identification des codes NATO Item Name à partir de PDFs techniques — en environnement air-gapped, sans cloud.",
           achievements: [
@@ -439,7 +439,7 @@ export const copy = {
       tagline:
         "I design and ship production GenAI systems — RAG, semantic search, and LLM serving — including on-premise and air-gapped setups, with no cloud dependency.",
       location: "Paris, France",
-      status: "HENSOLDT internship (Germany) • On-premise GenAI",
+      status: "Co-founder & CTO, Conjectura • On-premise GenAI",
       companyRole: "Co-founder & CTO",
       chips: [
         "Production GenAI",
@@ -474,9 +474,9 @@ export const copy = {
           role: "Software Engineer — AI",
           kind: "International internship",
           company: "HENSOLDT",
-          period: "June — Sept. 2026",
+          period: "June — early Sept. 2026",
           location: "Fürstenfeldbruck, Germany",
-          current: true,
+          current: false,
           description:
             "Designed and deployed NCORE AI, an end-to-end RAG system for NATO Item Name Code identification from technical PDFs — in an air-gapped environment, with no cloud.",
           achievements: [
