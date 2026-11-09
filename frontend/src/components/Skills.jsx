@@ -8,6 +8,7 @@ import {
   Globe,
 } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
+import { resetTilt, tiltCard } from "../lib/motion";
 
 const iconMap = {
   Sparkles: Sparkles,
@@ -17,10 +18,15 @@ const iconMap = {
   Database: Database,
 };
 
-const SkillCard = ({ skill }) => {
+const SkillCard = ({ skill, delay = 0 }) => {
   const Icon = iconMap[skill.icon] || Sparkles;
   return (
-    <div className="card-surface rounded-xl p-6 reveal h-full">
+    <div
+      className="card-surface spotlight rounded-xl p-6 reveal h-full"
+      style={{ transitionDelay: `${delay}ms` }}
+      onMouseMove={tiltCard}
+      onMouseLeave={resetTilt}
+    >
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">
           <Icon size={18} />
@@ -54,14 +60,14 @@ const Skills = () => {
         </div>
 
         <div className="mt-12 grid md:grid-cols-2 gap-5">
-          {featured.map((s) => (
-            <SkillCard key={s.category} skill={s} />
+          {featured.map((s, i) => (
+            <SkillCard key={s.category} skill={s} delay={i * 80} />
           ))}
         </div>
 
         <div className="mt-5 grid md:grid-cols-3 gap-5">
-          {rest.map((s) => (
-            <SkillCard key={s.category} skill={s} />
+          {rest.map((s, i) => (
+            <SkillCard key={s.category} skill={s} delay={i * 80} />
           ))}
         </div>
 
@@ -77,15 +83,20 @@ const Skills = () => {
           </div>
           <div className="md:col-span-8 grid sm:grid-cols-2 gap-4">
             {section.spoken.map((l) => (
-              <div key={l.name} className="card-surface rounded-lg p-4">
+              <div
+                key={l.name}
+                className="card-surface spotlight rounded-lg p-4"
+                onMouseMove={tiltCard}
+                onMouseLeave={resetTilt}
+              >
                 <div className="flex items-baseline justify-between">
                   <span className="text-white">{l.name}</span>
                   <span className="text-white/50 text-xs mono">{l.level}</span>
                 </div>
                 <div className="mt-3 h-1 rounded-full bg-white/5 overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-[#38bdf8] to-[#6366f1]"
-                    style={{ width: `${l.value}%` }}
+                    className="lang-fill h-full bg-gradient-to-r from-[#38bdf8] to-[#6366f1]"
+                    style={{ "--w": `${l.value}%` }}
                   />
                 </div>
               </div>

@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
 import { useToast } from "../hooks/use-toast";
+import { trackSpotlight } from "../lib/motion";
 
 const FORMSUBMIT_URL =
   "https://formsubmit.co/ajax/5f89ddc9d69312d3a3a5d9e709830ec8";
@@ -93,7 +94,8 @@ const Contact = () => {
           <div className="md:col-span-5 space-y-4 reveal">
             <a
               href={`mailto:${personal.email}`}
-              className="card-surface rounded-xl p-5 flex items-center justify-between group"
+              className="card-surface spotlight rounded-xl p-5 flex items-center justify-between group"
+              onMouseMove={trackSpotlight}
             >
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">
@@ -110,7 +112,10 @@ const Contact = () => {
               />
             </a>
 
-            <div className="card-surface rounded-xl p-5 flex items-center gap-4">
+            <div
+              className="card-surface spotlight rounded-xl p-5 flex items-center gap-4"
+              onMouseMove={trackSpotlight}
+            >
               <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">
                 <MapPin size={18} />
               </div>
@@ -162,7 +167,8 @@ const Contact = () => {
           ) : (
             <form
               onSubmit={onSubmit}
-              className="md:col-span-7 card-surface rounded-xl p-6 md:p-8 reveal relative overflow-hidden"
+              className="md:col-span-7 card-surface spotlight rounded-xl p-6 md:p-8 reveal relative overflow-hidden"
+              onMouseMove={trackSpotlight}
             >
               <div
                 aria-hidden="true"

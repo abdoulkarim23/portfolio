@@ -1,6 +1,8 @@
 import React from "react";
 import { ArrowRight, Github, Linkedin, Mail, MapPin, ExternalLink } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
+import NeuralField from "./three/NeuralField";
+import CoreOrb from "./three/CoreOrb";
 
 const Hero = () => {
   const { personal, t } = useI18n();
@@ -8,27 +10,24 @@ const Hero = () => {
 
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-36 pb-20 md:pb-28">
-      <div className="absolute inset-0 grid-bg" />
+      <NeuralField />
+      <div className="absolute inset-0 grid-bg opacity-40" />
       <div
-        className="accent-glow floaty"
+        className="pointer-events-none absolute inset-0 z-[1]"
         style={{
-          width: 520,
-          height: 520,
-          top: -180,
-          left: "55%",
           background:
-            "radial-gradient(circle at center, rgba(56,189,248,0.45), transparent 60%)",
+            "linear-gradient(90deg, rgba(7,7,10,0.82) 0%, rgba(7,7,10,0.45) 38%, rgba(7,7,10,0.12) 72%, rgba(7,7,10,0.28) 100%)",
         }}
       />
       <div
-        className="accent-glow"
+        className="accent-glow floaty"
         style={{
           width: 420,
           height: 420,
-          bottom: -160,
-          left: "-6%",
+          top: -160,
+          left: "58%",
           background:
-            "radial-gradient(circle at center, rgba(99,102,241,0.30), transparent 60%)",
+            "radial-gradient(circle at center, rgba(56,189,248,0.28), transparent 60%)",
         }}
       />
 
@@ -117,16 +116,18 @@ const Hero = () => {
         </div>
 
         <div className="md:col-span-4">
-          <div className="relative card-surface rounded-xl p-4 shadow-2xl">
-            <div className="flex items-center gap-1.5 pb-3 border-b border-white/5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
-              <span className="ml-2 mono text-[11px] text-white/50">
-                ~/arkam — zsh
-              </span>
-            </div>
-            <pre className="mono text-[12.5px] leading-6 pt-3 text-white/80 overflow-x-auto">
+          <div className="relative">
+            <CoreOrb />
+            <div className="relative card-surface rounded-xl p-4 shadow-2xl">
+              <div className="flex items-center gap-1.5 pb-3 border-b border-white/5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
+                <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                <span className="ml-2 mono text-[11px] text-white/50">
+                  ~/arkam — zsh
+                </span>
+              </div>
+              <pre className="mono text-[12.5px] leading-6 pt-3 text-white/80 overflow-x-auto">
 {`$ whoami
 Arkam ALI
 
@@ -141,7 +142,8 @@ mistral  fastapi  docker
 $ ./run.sh --mission
 > Serving LLM on-premise
   air-gapped, no cloud.`}
-            </pre>
+              </pre>
+            </div>
           </div>
         </div>
       </div>
