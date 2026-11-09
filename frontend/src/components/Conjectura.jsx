@@ -7,6 +7,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
+import { resetTilt, tiltCard, trackSpotlight } from "../lib/motion";
 
 const iconMap = {
   Layers,
@@ -40,7 +41,10 @@ const Conjectura = () => {
         </div>
 
         <div className="mt-12 grid md:grid-cols-12 gap-6">
-          <div className="md:col-span-5 card-surface rounded-xl p-7 reveal">
+          <div
+            className="md:col-span-5 card-surface spotlight rounded-xl p-7 reveal"
+            onMouseMove={trackSpotlight}
+          >
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">
                 <Building2 size={18} />
@@ -80,10 +84,16 @@ const Conjectura = () => {
           </div>
 
           <div className="md:col-span-7 grid gap-4">
-            {section.pillars.map((p) => {
+            {section.pillars.map((p, i) => {
               const Icon = iconMap[p.icon] || Layers;
               return (
-                <div key={p.title} className="card-surface rounded-xl p-6 reveal">
+                <div
+                  key={p.title}
+                  className="card-surface spotlight rounded-xl p-6 reveal"
+                  style={{ transitionDelay: `${i * 80}ms` }}
+                  onMouseMove={tiltCard}
+                  onMouseLeave={resetTilt}
+                >
                   <div className="flex gap-4">
                     <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8] shrink-0">
                       <Icon size={18} />

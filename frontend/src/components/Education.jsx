@@ -1,6 +1,7 @@
 import React from "react";
 import { GraduationCap } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
+import { resetTilt, tiltCard } from "../lib/motion";
 
 const Education = () => {
   const { t } = useI18n();
@@ -16,8 +17,14 @@ const Education = () => {
         </div>
 
         <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {section.items.map((e) => (
-            <div key={e.id} className="card-surface rounded-xl p-6 reveal">
+          {section.items.map((e, i) => (
+            <div
+              key={e.id}
+              className="card-surface spotlight rounded-xl p-6 reveal"
+              style={{ transitionDelay: `${i * 80}ms` }}
+              onMouseMove={tiltCard}
+              onMouseLeave={resetTilt}
+            >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">
                   <GraduationCap size={18} />

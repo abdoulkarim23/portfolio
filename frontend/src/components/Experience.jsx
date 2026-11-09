@@ -1,6 +1,7 @@
 import React from "react";
 import { Briefcase, MapPin, Check } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
+import { trackSpotlight } from "../lib/motion";
 
 const Experience = () => {
   const { t } = useI18n();
@@ -15,16 +16,23 @@ const Experience = () => {
         </div>
 
         <div className="mt-12 relative">
-          <div className="absolute left-[11px] md:left-[15px] top-2 bottom-2 w-px bg-gradient-to-b from-[#38bdf8]/40 via-white/10 to-transparent" />
+          <div className="draw-line timeline-line absolute left-[11px] md:left-[15px] top-2 bottom-2 w-px" />
 
           <div className="space-y-8">
-            {section.items.map((e) => (
-              <div key={e.id} className="relative pl-10 md:pl-14 reveal">
-                <span className="absolute left-0 top-1.5 w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#07070a] border border-[#38bdf8]/50 grid place-items-center">
+            {section.items.map((e, i) => (
+              <div
+                key={e.id}
+                className="relative pl-10 md:pl-14 reveal"
+                style={{ transitionDelay: `${i * 90}ms` }}
+              >
+                <span className="timeline-node absolute left-0 top-1.5 w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#07070a] border border-[#38bdf8]/50 grid place-items-center">
                   <Briefcase size={12} className="text-[#38bdf8]" />
                 </span>
 
-                <div className="card-surface rounded-xl p-6 md:p-7">
+                <div
+                  className="card-surface spotlight rounded-xl p-6 md:p-7"
+                  onMouseMove={trackSpotlight}
+                >
                   <div className="flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <div className="flex flex-wrap items-center gap-2 mb-1">

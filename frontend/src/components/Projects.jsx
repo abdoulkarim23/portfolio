@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Github, ArrowUpRight, Lock } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
+import { trackSpotlight } from "../lib/motion";
 
 const Projects = () => {
   const { personal, t } = useI18n();
@@ -32,9 +33,11 @@ const Projects = () => {
               key={p.id}
               onMouseEnter={() => setHovered(idx)}
               onMouseLeave={() => setHovered(null)}
-              className={`card-surface rounded-xl p-6 group relative overflow-hidden reveal ${
+              className={`card-surface spotlight rounded-xl p-6 group relative overflow-hidden reveal ${
                 p.featured ? "md:col-span-2" : ""
               }`}
+              style={{ transitionDelay: `${idx * 70}ms` }}
+              onMouseMove={trackSpotlight}
             >
               <div
                 className="absolute inset-x-0 top-0 h-px transition-opacity"

@@ -1,5 +1,6 @@
 import React from "react";
 import { useI18n } from "../i18n/LanguageContext";
+import { resetTilt, tiltCard } from "../lib/motion";
 
 const About = () => {
   const { t } = useI18n();
@@ -23,7 +24,12 @@ const About = () => {
           <div className="md:col-span-5 reveal">
             <div className="grid grid-cols-2 gap-4">
               {about.highlights.map((h) => (
-                <div key={h.label} className="card-surface rounded-lg p-5">
+                <div
+                  key={h.label}
+                  className="card-surface spotlight rounded-lg p-5"
+                  onMouseMove={tiltCard}
+                  onMouseLeave={resetTilt}
+                >
                   <div className="mono text-2xl md:text-3xl text-white font-semibold">
                     {h.value}
                   </div>

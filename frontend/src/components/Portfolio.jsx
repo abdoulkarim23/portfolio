@@ -9,10 +9,12 @@ import Education from "./Education";
 import Conjectura from "./Conjectura";
 import Contact from "./Contact";
 import Footer from "./Footer";
+import ScrollProgress from "./ScrollProgress";
+import CursorGlow from "./CursorGlow";
 
 const Portfolio = () => {
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal");
+    const els = document.querySelectorAll(".reveal, .draw-line");
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -30,6 +32,8 @@ const Portfolio = () => {
 
   return (
     <div className="relative">
+      <ScrollProgress />
+      <CursorGlow />
       <Navbar />
       <main>
         <Hero />

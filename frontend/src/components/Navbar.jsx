@@ -7,12 +7,35 @@ const Navbar = () => {
   const { personal, t } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    let raf = 0;
+    const update = () => {
+      setScrolled(window.scrollY > 24);
+      const marker = window.scrollY + 120;
+      let current = "";
+      for (const link of t.navLinks) {
+        const el = document.getElementById(link.href.slice(1));
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (top <= marker) current = link.href;
+      }
+      setActive(current);
+    };
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [t.navLinks]);
 
   return (
     <header
@@ -35,7 +58,12 @@ const Navbar = () => {
 
         <nav className="hidden lg:flex items-center gap-5">
           {t.navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="nav-link text-sm">
+            <a
+              key={l.href}
+              href={l.href}
+              className={`nav-link text-sm${active === l.href ? " is-active" : ""}`}
+              aria-current={active === l.href ? "true" : undefined}
+            >
               {l.label}
             </a>
           ))}
@@ -70,7 +98,7 @@ const Navbar = () => {
               <a
                 key={l.href}
                 href={l.href}
-                className="nav-link text-sm"
+                className={`nav-link text-sm${active === l.href ? " is-active" : ""}`}
                 onClick={() => setOpen(false)}
               >
                 {l.label}
