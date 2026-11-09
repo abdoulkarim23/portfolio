@@ -29,7 +29,7 @@ const Conjectura = () => {
           right: "-15%",
           top: "-10%",
           background:
-            "radial-gradient(circle at center, rgba(56,189,248,0.25), transparent 60%)",
+            "radial-gradient(circle at center, rgba(0,240,255,0.25), transparent 60%)",
         }}
       />
 
@@ -46,7 +46,7 @@ const Conjectura = () => {
             onMouseMove={trackSpotlight}
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff]">
                 <Building2 size={18} />
               </div>
               <div>
@@ -95,7 +95,7 @@ const Conjectura = () => {
                   onMouseLeave={resetTilt}
                 >
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8] shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff] shrink-0">
                       <Icon size={18} />
                     </div>
                     <div>

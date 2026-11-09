@@ -11,6 +11,8 @@ import Contact from "./Contact";
 import Footer from "./Footer";
 import ScrollProgress from "./ScrollProgress";
 import CursorGlow from "./CursorGlow";
+import SceneCanvas from "../scene/SceneCanvas";
+import SmoothScroll from "../fx/SmoothScroll";
 
 const Portfolio = () => {
   useEffect(() => {
@@ -32,6 +34,9 @@ const Portfolio = () => {
 
   return (
     <div className="relative">
+      <SmoothScroll />
+      <SceneCanvas />
+      <div className="relative z-10">
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
@@ -46,6 +51,7 @@ const Portfolio = () => {
         <Contact />
       </main>
       <Footer />
+      </div>
     </div>
   );
 };

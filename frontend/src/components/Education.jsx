@@ -26,13 +26,13 @@ const Education = () => {
               onMouseLeave={resetTilt}
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#38bdf8]">
+                <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff]">
                   <GraduationCap size={18} />
                 </div>
                 <span className="mono text-xs text-white/50">{e.period}</span>
               </div>
               <h3 className="mt-4 text-white text-lg font-medium">{e.school}</h3>
-              <p className="mt-1 text-[#38bdf8] mono text-xs">{e.degree}</p>
+              <p className="mt-1 text-[#00f0ff] mono text-xs">{e.degree}</p>
               <p className="mt-3 text-white/60 text-sm leading-relaxed">
                 {e.field}
               </p>
