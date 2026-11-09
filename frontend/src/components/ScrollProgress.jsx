@@ -33,7 +33,7 @@ const ScrollProgress = () => {
     >
       <div
         ref={barRef}
-        className="h-full origin-left bg-gradient-to-r from-[#38bdf8] to-[#818cf8]"
+        className="h-full origin-left bg-gradient-to-r from-[#00f0ff] to-[#00ff66]"
         style={{ transform: "scaleX(0)" }}
       />
     </div>

@@ -41,7 +41,7 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-xl bg-[#07070a]/75 border-b border-white/5"
+          ? "backdrop-blur-xl bg-[#050814]/75 border-b border-white/5"
           : "bg-transparent"
       }`}
     >
@@ -52,7 +52,7 @@ const Navbar = () => {
           </span>
           <span className="text-sm text-white/90 hidden sm:inline">
             {personal.name}
-            <span className="text-[#38bdf8]">.</span>
+            <span className="text-[#00f0ff]">.</span>
           </span>
         </a>
 
@@ -92,7 +92,7 @@ const Navbar = () => {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-white/5 bg-[#07070a]/95 backdrop-blur-xl">
+        <div className="lg:hidden border-t border-white/5 bg-[#050814]/95 backdrop-blur-xl">
           <div className="container-xl py-4 flex flex-col gap-4">
             {t.navLinks.map((l) => (
               <a

@@ -25,8 +25,8 @@ const Experience = () => {
                 className="relative pl-10 md:pl-14 reveal"
                 style={{ transitionDelay: `${i * 90}ms` }}
               >
-                <span className="timeline-node absolute left-0 top-1.5 w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#07070a] border border-[#38bdf8]/50 grid place-items-center">
-                  <Briefcase size={12} className="text-[#38bdf8]" />
+                <span className="timeline-node absolute left-0 top-1.5 w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#050814] border border-[#00f0ff]/50 grid place-items-center">
+                  <Briefcase size={12} className="text-[#00f0ff]" />
                 </span>
 
                 <div
@@ -48,7 +48,7 @@ const Experience = () => {
                         )}
                       </div>
                       <h3 className="text-white text-lg font-medium">{e.role}</h3>
-                      <p className="text-[#38bdf8] mono text-sm mt-0.5">
+                      <p className="text-[#00f0ff] mono text-sm mt-0.5">
                         {e.company}
                       </p>
                     </div>
@@ -67,7 +67,7 @@ const Experience = () => {
                   <ul className="mt-5 space-y-2">
                     {e.achievements.map((a, i) => (
                       <li key={i} className="flex gap-3 text-white/70 text-sm">
-                        <Check size={16} className="text-[#38bdf8] mt-0.5 shrink-0" />
+                        <Check size={16} className="text-[#00f0ff] mt-0.5 shrink-0" />
                         <span>{a}</span>
                       </li>
                     ))}

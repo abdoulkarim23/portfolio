@@ -15,7 +15,7 @@ const Footer = () => {
             </span>
             <span className="text-white/90">
               {personal.name}
-              <span className="text-[#38bdf8]">.</span>
+              <span className="text-[#00f0ff]">.</span>
             </span>
           </div>
           <p className="mt-4 text-white/55 text-sm max-w-sm">

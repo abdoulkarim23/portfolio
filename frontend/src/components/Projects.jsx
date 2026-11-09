@@ -43,7 +43,7 @@ const Projects = () => {
                 className="absolute inset-x-0 top-0 h-px transition-opacity"
                 style={{
                   background:
-                    "linear-gradient(90deg, transparent, rgba(56,189,248,0.6), transparent)",
+                    "linear-gradient(90deg, transparent, rgba(0,240,255,0.6), transparent)",
                   opacity: hovered === idx ? 1 : 0,
                 }}
               />
@@ -55,7 +55,7 @@ const Projects = () => {
                       {p.subtitle} • {p.year}
                     </span>
                     {p.featured && (
-                      <span className="mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-[#38bdf8]/30 text-[#38bdf8] bg-[#38bdf8]/10">
+                      <span className="mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full border border-[#00f0ff]/30 text-[#00f0ff] bg-[#00f0ff]/10">
                         {t.ui.flagship}
                       </span>
                     )}
@@ -74,7 +74,7 @@ const Projects = () => {
                     href={p.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-md border border-white/10 grid place-items-center text-white/60 hover:text-white hover:border-[#38bdf8]/60 transition shrink-0"
+                    className="w-8 h-8 rounded-md border border-white/10 grid place-items-center text-white/60 hover:text-white hover:border-[#00f0ff]/60 transition shrink-0"
                     aria-label={`${t.ui.openProject} ${p.title}`}
                   >
                     <ArrowUpRight size={16} />
@@ -105,7 +105,7 @@ const Projects = () => {
               <ul className="mt-4 space-y-1.5">
                 {p.bullets.map((b, i) => (
                   <li key={i} className="flex gap-2 text-white/60 text-[13px]">
-                    <span className="text-[#38bdf8] mono">›</span>
+                    <span className="text-[#00f0ff] mono">›</span>
                     <span>{b}</span>
                   </li>
                 ))}

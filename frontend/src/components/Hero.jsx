@@ -1,40 +1,47 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { ArrowRight, Github, Linkedin, Mail, MapPin, ExternalLink } from "lucide-react";
+import gsap from "gsap";
 import { useI18n } from "../i18n/LanguageContext";
-import NeuralField from "./three/NeuralField";
-import CoreOrb from "./three/CoreOrb";
+import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion";
+import DecryptText from "../fx/DecryptText";
 
 const Hero = () => {
-  const { personal, t } = useI18n();
+  const { personal, t, lang } = useI18n();
   const p = t.personal;
+  const rootRef = useRef(null);
+  const reduced = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (reduced) return undefined;
+    const ctx = gsap.context(() => {
+      gsap.from("[data-hero-rise]", {
+        y: 16,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.07,
+        ease: "power3.out",
+      });
+    }, rootRef);
+    return () => ctx.revert();
+  }, [reduced, lang]);
 
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-36 pb-20 md:pb-28">
-      <NeuralField />
-      <div className="absolute inset-0 grid-bg opacity-40" />
       <div
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            "linear-gradient(90deg, rgba(7,7,10,0.82) 0%, rgba(7,7,10,0.45) 38%, rgba(7,7,10,0.12) 72%, rgba(7,7,10,0.28) 100%)",
-        }}
-      />
-      <div
-        className="accent-glow floaty"
-        style={{
-          width: 420,
-          height: 420,
-          top: -160,
-          left: "58%",
-          background:
-            "radial-gradient(circle at center, rgba(56,189,248,0.28), transparent 60%)",
+            "linear-gradient(90deg, rgba(5,8,20,0.9) 0%, rgba(5,8,20,0.62) 36%, rgba(5,8,20,0.18) 68%, rgba(5,8,20,0.42) 100%)",
         }}
       />
 
-      <div className="container-xl relative z-10 grid md:grid-cols-12 gap-10 items-center">
+      <div ref={rootRef} className="container-xl relative z-10 grid md:grid-cols-12 gap-10 items-center">
         <div className="md:col-span-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mono text-[11px] text-white/70 mb-7">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <div
+            data-hero-rise
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.02] mono text-[11px] text-white/70 mb-7"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00ff66] animate-pulse" />
             {p.status}
           </div>
 
@@ -42,20 +49,20 @@ const Hero = () => {
             className="font-semibold text-white leading-[1.02] tracking-tight"
             style={{ fontSize: "clamp(2.4rem, 6vw, 4.5rem)" }}
           >
-            {personal.name}
-            <span className="text-[#38bdf8]">.</span>
+            <DecryptText text={personal.name} />
+            <span className="text-[#00f0ff]">.</span>
           </h1>
 
-          <p className="mt-4 mono text-[#38bdf8] text-sm md:text-base">
-            &lt;{p.title}/&gt;
+          <p className="mt-4 mono text-[#00f0ff] text-sm md:text-base">
+            <DecryptText text={`<${p.title}/>`} />
             <span className="blink text-white/50">_</span>
           </p>
 
-          <p className="mt-6 text-white/70 max-w-2xl text-base md:text-lg leading-relaxed">
+          <p data-hero-rise className="mt-6 text-white/70 max-w-2xl text-base md:text-lg leading-relaxed">
             {p.tagline}
           </p>
 
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div data-hero-rise className="mt-5 flex flex-wrap gap-2">
             {p.chips.map((chip) => (
               <span key={chip} className="chip">
                 {chip}
@@ -63,7 +70,7 @@ const Hero = () => {
             ))}
           </div>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <div data-hero-rise className="mt-9 flex flex-wrap items-center gap-3">
             <a
               href="#projects"
               className="btn-primary rounded-md px-5 py-3 text-sm font-medium inline-flex items-center gap-2"
@@ -80,7 +87,7 @@ const Hero = () => {
             </a>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-5 text-white/60 text-sm">
+          <div data-hero-rise className="mt-10 flex flex-wrap items-center gap-5 text-white/60 text-sm">
             <span className="inline-flex items-center gap-2">
               <MapPin size={14} />
               {p.location}
@@ -115,10 +122,9 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="md:col-span-4">
+        <div className="md:col-span-4" data-hero-rise>
           <div className="relative">
-            <CoreOrb />
-            <div className="relative card-surface rounded-xl p-4 shadow-2xl">
+            <div className="relative card-surface terminal-screen rounded-xl p-4 shadow-2xl">
               <div className="flex items-center gap-1.5 pb-3 border-b border-white/5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
