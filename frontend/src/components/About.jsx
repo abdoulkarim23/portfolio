@@ -1,6 +1,7 @@
 import React from "react";
 import { useI18n } from "../i18n/LanguageContext";
 import { resetTilt, tiltCard } from "../lib/motion";
+import { ScrambleTitle } from "../fx/DecryptText";
 
 const About = () => {
   const { t } = useI18n();
@@ -11,7 +12,7 @@ const About = () => {
       <div className="container-xl">
         <div className="reveal max-w-2xl">
           <span className="section-eyebrow">{about.eyebrow}</span>
-          <h2 className="section-title mt-3">{about.heading}</h2>
+          <ScrambleTitle>{about.heading}</ScrambleTitle>
         </div>
 
         <div className="mt-12 grid md:grid-cols-12 gap-10">

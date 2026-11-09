@@ -10,7 +10,7 @@ import Conjectura from "./Conjectura";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import ScrollProgress from "./ScrollProgress";
-import CursorGlow from "./CursorGlow";
+import NeonCursor from "../fx/NeonCursor";
 import SceneCanvas from "../scene/SceneCanvas";
 import SmoothScroll from "../fx/SmoothScroll";
 
@@ -38,7 +38,7 @@ const Portfolio = () => {
       <SceneCanvas />
       <div className="relative z-10">
       <ScrollProgress />
-      <CursorGlow />
+      <NeonCursor />
       <Navbar />
       <main>
         <Hero />

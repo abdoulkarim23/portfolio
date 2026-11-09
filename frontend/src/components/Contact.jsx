@@ -11,6 +11,7 @@ import {
 import { useI18n } from "../i18n/LanguageContext";
 import { useToast } from "../hooks/use-toast";
 import { trackSpotlight } from "../lib/motion";
+import { ScrambleTitle } from "../fx/DecryptText";
 
 const FORMSUBMIT_URL =
   "https://formsubmit.co/ajax/5f89ddc9d69312d3a3a5d9e709830ec8";
@@ -86,7 +87,7 @@ const Contact = () => {
       <div className="container-xl">
         <div className="reveal max-w-2xl">
           <span className="section-eyebrow">{c.eyebrow}</span>
-          <h2 className="section-title mt-3">{c.heading}</h2>
+          <ScrambleTitle>{c.heading}</ScrambleTitle>
           <p className="mt-4 text-white/65">{c.intro}</p>
         </div>
 
