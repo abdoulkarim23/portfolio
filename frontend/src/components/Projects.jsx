@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Github, ArrowUpRight, Lock } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
-import { trackSpotlight } from "../lib/motion";
+import { resetTilt, tiltCard } from "../lib/motion";
+import { ScrambleTitle } from "../fx/DecryptText";
 
 const Projects = () => {
   const { personal, t } = useI18n();
@@ -14,7 +15,7 @@ const Projects = () => {
         <div className="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-6 max-w-none">
           <div className="max-w-2xl">
             <span className="section-eyebrow">{section.eyebrow}</span>
-            <h2 className="section-title mt-3">{section.heading}</h2>
+            <ScrambleTitle>{section.heading}</ScrambleTitle>
             <p className="mt-4 text-white/65">{section.intro}</p>
           </div>
           <a
@@ -32,12 +33,15 @@ const Projects = () => {
             <article
               key={p.id}
               onMouseEnter={() => setHovered(idx)}
-              onMouseLeave={() => setHovered(null)}
-              className={`card-surface spotlight rounded-xl p-6 group relative overflow-hidden reveal ${
+              onMouseLeave={(e) => {
+                setHovered(null);
+                resetTilt(e);
+              }}
+              className={`card-surface glass-card spotlight rounded-xl p-6 group relative overflow-hidden reveal ${
                 p.featured ? "md:col-span-2" : ""
               }`}
               style={{ transitionDelay: `${idx * 70}ms` }}
-              onMouseMove={trackSpotlight}
+              onMouseMove={tiltCard}
             >
               <div
                 className="absolute inset-x-0 top-0 h-px transition-opacity"

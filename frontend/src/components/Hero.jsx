@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { useI18n } from "../i18n/LanguageContext";
 import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion";
 import DecryptText from "../fx/DecryptText";
+import { resetTilt, tiltCard } from "../lib/motion";
 
 const Hero = () => {
   const { personal, t, lang } = useI18n();
@@ -124,7 +125,11 @@ const Hero = () => {
 
         <div className="md:col-span-4" data-hero-rise>
           <div className="relative">
-            <div className="relative card-surface terminal-screen rounded-xl p-4 shadow-2xl">
+            <div
+              className="relative card-surface glass-card spotlight terminal-screen rounded-xl p-4 shadow-2xl"
+              onMouseMove={tiltCard}
+              onMouseLeave={resetTilt}
+            >
               <div className="flex items-center gap-1.5 pb-3 border-b border-white/5">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
                 <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />

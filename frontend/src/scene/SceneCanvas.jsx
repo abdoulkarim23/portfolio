@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion";
 import { scrollMotion } from "./scrollMotion";
 import { createDataField } from "./createDataField";
@@ -70,6 +74,17 @@ const SceneCanvas = () => {
     }
     parts.forEach((part) => scene.add(part.object));
 
+    let composer = null;
+    if (!mobile) {
+      composer = new EffectComposer(renderer);
+      composer.setPixelRatio(renderer.getPixelRatio());
+      composer.addPass(new RenderPass(scene, camera));
+      composer.addPass(
+        new UnrealBloomPass(new THREE.Vector2(256, 256), 0.72, 0.42, 0.28)
+      );
+      composer.addPass(new OutputPass());
+    }
+
     const resize = () => {
       const w = mount.clientWidth;
       const h = mount.clientHeight;
@@ -77,6 +92,10 @@ const SceneCanvas = () => {
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
       renderer.setSize(w, h, false);
+      if (composer) {
+        composer.setPixelRatio(renderer.getPixelRatio());
+        composer.setSize(w, h);
+      }
     };
     const ro = new ResizeObserver(resize);
     ro.observe(mount);
@@ -100,7 +119,8 @@ const SceneCanvas = () => {
       camera.lookAt(x * 0.25, 0.05, camera.position.z - 7);
       camera.rotateZ(m.mouseX * -0.025);
       parts.forEach((part) => part.update(t));
-      renderer.render(scene, camera);
+      if (composer) composer.render();
+      else renderer.render(scene, camera);
     };
     tick();
 
@@ -108,6 +128,7 @@ const SceneCanvas = () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
       parts.forEach((part) => part.dispose());
+      composer?.dispose();
       renderer.dispose();
       if (renderer.domElement.parentNode === mount) {
         mount.removeChild(renderer.domElement);

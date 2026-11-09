@@ -2,6 +2,7 @@ import React from "react";
 import { Briefcase, MapPin, Check } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
 import { trackSpotlight } from "../lib/motion";
+import { ScrambleTitle } from "../fx/DecryptText";
 
 const Experience = () => {
   const { t } = useI18n();
@@ -12,7 +13,7 @@ const Experience = () => {
       <div className="container-xl">
         <div className="reveal max-w-2xl">
           <span className="section-eyebrow">{section.eyebrow}</span>
-          <h2 className="section-title mt-3">{section.heading}</h2>
+          <ScrambleTitle>{section.heading}</ScrambleTitle>
         </div>
 
         <div className="mt-12 relative">

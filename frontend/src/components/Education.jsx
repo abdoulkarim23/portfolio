@@ -2,6 +2,7 @@ import React from "react";
 import { GraduationCap } from "lucide-react";
 import { useI18n } from "../i18n/LanguageContext";
 import { resetTilt, tiltCard } from "../lib/motion";
+import { ScrambleTitle } from "../fx/DecryptText";
 
 const Education = () => {
   const { t } = useI18n();
@@ -12,7 +13,7 @@ const Education = () => {
       <div className="container-xl">
         <div className="reveal max-w-2xl">
           <span className="section-eyebrow">{section.eyebrow}</span>
-          <h2 className="section-title mt-3">{section.heading}</h2>
+          <ScrambleTitle>{section.heading}</ScrambleTitle>
           <p className="mt-4 text-white/65">{section.intro}</p>
         </div>
 
