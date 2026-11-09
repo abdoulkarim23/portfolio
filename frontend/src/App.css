@@ -197,6 +197,17 @@ html {
 }
 .floaty { animation: floaty 7s ease-in-out infinite; }
 
+.three-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floaty { animation: none; }
+  .blink { animation: none; opacity: 1; }
+}
+
 /* Noise */
 .noise::before {
   content: "";
