@@ -43,7 +43,7 @@ const SceneCanvas = () => {
     if (!mount) return undefined;
 
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050814, mobile ? 0.05 : 0.04);
+    scene.fog = new THREE.FogExp2(0x050814, 0.04);
     scene.add(new THREE.AmbientLight(0xffffff, 0.45));
     const key = new THREE.DirectionalLight(0xd9fff8, 0.75);
     key.position.set(1.5, 3.5, 6);
