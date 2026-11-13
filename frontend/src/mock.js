@@ -137,9 +137,9 @@ export const copy = {
           role: "Data Scientist / AI Engineer",
           kind: "Alternance",
           company: "État-major des armées — CIMD",
-          period: "Sept. 2024 — Août 2026",
+          period: "Sept. 2024 — Août 2027",
           location: "Paris",
-          current: false,
+          current: true,
           description:
             "Mise en production d'un moteur de recherche sémantique et d'un assistant IA pour la codification NATO, en environnement on-premise sécurisé.",
           achievements: [
@@ -223,7 +223,7 @@ export const copy = {
           id: "proj-nato-rag",
           title: "Recherche sémantique NATO",
           subtitle: "État-major des armées — CIMD",
-          year: "2024 — 2026",
+          year: "2024 — 2027",
           featured: false,
           confidential: true,
           summary:
@@ -501,9 +501,9 @@ export const copy = {
           role: "Data Scientist / AI Engineer",
           kind: "Apprenticeship",
           company: "French Armed Forces General Staff — CIMD",
-          period: "Sept. 2024 — Aug. 2026",
+          period: "Sept. 2024 — Aug. 2027",
           location: "Paris",
-          current: false,
+          current: true,
           description:
             "Shipped a semantic search engine and an AI assistant for NATO codification, in a secure on-premise environment.",
           achievements: [
@@ -587,7 +587,7 @@ export const copy = {
           id: "proj-nato-rag",
           title: "NATO semantic search",
           subtitle: "French Armed Forces — CIMD",
-          year: "2024 — 2026",
+          year: "2024 — 2027",
           featured: false,
           confidential: true,
           summary:
