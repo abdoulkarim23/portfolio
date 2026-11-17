@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Génère rack.svg, la baie de dépôts publics affichée sur le profil GitHub.
+"""Génère la baie de dépôts publics affichée sur le profil GitHub.
 
+Une image par langue : rack.svg (français) et rack.en.svg (anglais).
 Bibliothèque standard uniquement, aucun service tiers : les données viennent
 de l'API GitHub et le SVG est écrit ici.
 
@@ -22,11 +23,36 @@ from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "rack.json"
-OUTPUT_PATH = ROOT / "rack.svg"
 API = "https://api.github.com"
 
-MONTHS = ["janv.", "févr.", "mars", "avr.", "mai", "juin",
-          "juil.", "août", "sept.", "oct.", "nov.", "déc."]
+LOCALES = {
+    "fr": {
+        "output": "rack.svg",
+        "months": ["janv.", "févr.", "mars", "avr.", "mai", "juin",
+                   "juil.", "août", "sept.", "oct.", "nov.", "déc."],
+        "heading": "BAIE PUBLIQUE",
+        "last_push": "dernier push : {date}",
+        "legend": {"live": "actif, moins de 30 j", "warm": "moins de 6 mois",
+                   "idle": "au repos", "offline": "hors ligne"},
+        "bars": "barres : commits par semaine, {weeks} sem.",
+        "title": "Baie de dépôts publics de {user}",
+        "desc": "Dépôts publics, du plus récent au plus ancien : {names}. "
+                "Le reste du travail tourne sur des réseaux isolés et n'est pas publié.",
+    },
+    "en": {
+        "output": "rack.en.svg",
+        "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        "heading": "PUBLIC RACK",
+        "last_push": "last push: {date}",
+        "legend": {"live": "active, under 30 d", "warm": "under 6 months",
+                   "idle": "idle", "offline": "offline"},
+        "bars": "bars: commits per week, {weeks} wk",
+        "title": "Rack of {user}'s public repositories",
+        "desc": "Public repositories, most recent first: {names}. "
+                "The rest of the work runs on isolated networks and is not published.",
+    },
+}
 
 WIDTH = 840
 UNIT_X = 52
@@ -116,8 +142,15 @@ def recency(pushed, today):
     return "idle"
 
 
-def french_date(day):
-    return f"{day.day} {MONTHS[day.month - 1]} {day.year}"
+def short_date(day, locale):
+    return f"{day.day} {locale['months'][day.month - 1]} {day.year}"
+
+
+def localized(value, lang):
+    """Accepte un texte simple ou un dictionnaire {"fr": ..., "en": ...}."""
+    if isinstance(value, dict):
+        return value.get(lang) or value.get("fr") or ""
+    return value or ""
 
 
 def shorten(text, limit):
@@ -200,12 +233,10 @@ def render_unit(index, top, unit, scale_max):
     return "".join(parts)
 
 
-def render_legend(y, weeks):
-    items = [("live", "actif, moins de 30 j"), ("warm", "moins de 6 mois"),
-             ("idle", "au repos"), ("offline", "hors ligne")]
+def render_legend(y, weeks, locale):
     parts = []
     x = UNIT_X + 6
-    for state, label in items:
+    for state, label in locale["legend"].items():
         parts.append(f'<circle cx="{x}" cy="{y - 4}" r="3.5" fill="{LED_COLORS[state]}"/>')
         parts.append(
             f'<text x="{x + 10}" y="{y}" font-family="{MONO}" font-size="11" '
@@ -214,24 +245,26 @@ def render_legend(y, weeks):
         x += 24 + len(label) * 6.7
     parts.append(
         f'<text x="{UNIT_X + UNIT_W - 6}" y="{y}" text-anchor="end" font-family="{MONO}" '
-        f'font-size="11" fill="#5f7391">barres : commits par semaine, {weeks} sem.</text>'
+        f'font-size="11" fill="#5f7391">{escape(locale["bars"].format(weeks=weeks))}</text>'
     )
     return "".join(parts)
 
 
-def render(user, units, weeks, last_push):
+def render(user, units, weeks, last_push, locale):
     body_h = len(units) * (UNIT_H + UNIT_GAP) - UNIT_GAP
     height = HEADER_H + body_h + FOOTER_H
     scale_max = max([4] + [count for unit in units for count in unit.get("weeks", [])])
     right = UNIT_X + UNIT_W
-    summary = ", ".join(unit["name"] for unit in units if unit["state"] != "offline")
+    names = ", ".join(unit["name"] for unit in units if unit["state"] != "offline")
+    heading = locale["heading"]
+    # 12 px en chasse fixe : environ 7,2 px par caractère, plus l'interlettrage.
+    heading_w = len(heading) * (7.2 + 2.4)
 
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {height}" '
         f'width="{WIDTH}" height="{height}" role="img" aria-labelledby="rack-title rack-desc">',
-        f'<title id="rack-title">Baie de dépôts publics de {escape(user)}</title>',
-        f'<desc id="rack-desc">Dépôts publics, du plus récent au plus ancien : {escape(summary)}. '
-        f'Le reste du travail tourne sur des réseaux isolés et n\'est pas publié.</desc>',
+        f'<title id="rack-title">{escape(locale["title"].format(user=user))}</title>',
+        f'<desc id="rack-desc">{escape(locale["desc"].format(names=names))}</desc>',
         "<defs>",
         '<filter id="halo" x="-100%" y="-100%" width="300%" height="300%">'
         '<feGaussianBlur stdDeviation="3"/></filter>',
@@ -250,11 +283,12 @@ def render(user, units, weeks, last_push):
         f'<rect x="0.5" y="0.5" width="{WIDTH - 1}" height="{height - 1}" rx="10" '
         f'fill="#050814" stroke="#16233f"/>',
         f'<text x="{UNIT_X}" y="30" font-family="{MONO}" font-size="12" letter-spacing="2.4" '
-        f'fill="#00f0ff">BAIE PUBLIQUE</text>',
-        f'<text x="{UNIT_X + 132}" y="30" font-family="{MONO}" font-size="12" '
+        f'fill="#00f0ff">{escape(heading)}</text>',
+        f'<text x="{UNIT_X + heading_w + 8:.0f}" y="30" font-family="{MONO}" font-size="12" '
         f'fill="#5f7391">github.com/{escape(user)}</text>',
         f'<text x="{right}" y="30" text-anchor="end" font-family="{MONO}" font-size="12" '
-        f'fill="#5f7391">dernier push : {escape(french_date(last_push))}</text>',
+        f'fill="#5f7391">'
+        f'{escape(locale["last_push"].format(date=short_date(last_push, locale)))}</text>',
         f'<line x1="{UNIT_X}" y1="46" x2="{right}" y2="46" stroke="#16233f"/>',
         f'<line class="flow" x1="{UNIT_X}" y1="46" x2="{right}" y2="46" stroke="#00f0ff" '
         f'stroke-opacity="0.85"/>',
@@ -267,7 +301,7 @@ def render(user, units, weeks, last_push):
     for index, unit in enumerate(units):
         top = HEADER_H + index * (UNIT_H + UNIT_GAP)
         out.append(render_unit(index, top, unit, scale_max))
-    out.append(render_legend(HEADER_H + body_h + 29, weeks))
+    out.append(render_legend(HEADER_H + body_h + 29, weeks, locale))
     out.append("</svg>")
     return "\n".join(out) + "\n"
 
@@ -282,32 +316,35 @@ def main():
     if not repos:
         sys.exit(f"Aucun dépôt public à afficher pour {user}.")
 
-    descriptions = config.get("descriptions", {})
-    units = []
     for repo in repos:
-        pushed = parse_time(repo["pushed_at"]).date()
-        text = descriptions.get(repo["name"]) or repo["description"] or ""
-        units.append({
-            "name": repo["name"],
-            "text": shorten(text, 62),
-            "language": repo["language"] or "",
-            "date": french_date(pushed),
-            "state": recency(pushed, today),
-            "weeks": weekly_commits(user, repo["name"], weeks, today),
-        })
+        repo["pushed"] = parse_time(repo["pushed_at"]).date()
+        repo["weeks"] = weekly_commits(user, repo["name"], weeks, today)
 
+    descriptions = config.get("descriptions", {})
     offline = config.get("offline")
-    if offline:
-        units.append({
-            "name": offline["name"],
-            "text": shorten(offline["text"], 84),
-            "tag": offline.get("tag", ""),
-            "state": "offline",
-        })
+    last_push = repos[0]["pushed"]
 
-    last_push = parse_time(repos[0]["pushed_at"]).date()
-    OUTPUT_PATH.write_text(render(user, units, weeks, last_push), encoding="utf-8")
-    print(f"{OUTPUT_PATH.name} : {len(units)} unités, dernier push le {french_date(last_push)}")
+    for lang, locale in LOCALES.items():
+        units = [{
+            "name": repo["name"],
+            "text": shorten(
+                localized(descriptions.get(repo["name"]), lang) or repo["description"] or "", 62
+            ),
+            "language": repo["language"] or "",
+            "date": short_date(repo["pushed"], locale),
+            "state": recency(repo["pushed"], today),
+            "weeks": repo["weeks"],
+        } for repo in repos]
+        if offline:
+            units.append({
+                "name": localized(offline["name"], lang),
+                "text": shorten(localized(offline["text"], lang), 84),
+                "tag": localized(offline.get("tag"), lang),
+                "state": "offline",
+            })
+        output = ROOT / locale["output"]
+        output.write_text(render(user, units, weeks, last_push, locale), encoding="utf-8")
+        print(f"{output.name} : {len(units)} unités")
 
 
 if __name__ == "__main__":

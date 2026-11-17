@@ -1,3 +1,5 @@
+Français · [English](README.en.md)
+
 # Arkam ALI
 
 Ingénieur IA/ML. Je mets en production des systèmes GenAI (RAG, recherche sémantique, serving de LLM) sur des infrastructures on-premise et air-gapped, là où le cloud n'est pas une option.

@@ -15,7 +15,7 @@
 </defs>
 <rect x="0.5" y="0.5" width="839" height="475" rx="10" fill="#050814" stroke="#16233f"/>
 <text x="52" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" letter-spacing="2.4" fill="#00f0ff">BAIE PUBLIQUE</text>
-<text x="184" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#5f7391">github.com/abdoulkarim23</text>
+<text x="185" y="30" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#5f7391">github.com/abdoulkarim23</text>
 <text x="788" y="30" text-anchor="end" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="12" fill="#5f7391">dernier push : 17 nov. 2026</text>
 <line x1="52" y1="46" x2="788" y2="46" stroke="#16233f"/>
 <line class="flow" x1="52" y1="46" x2="788" y2="46" stroke="#00f0ff" stroke-opacity="0.85"/>

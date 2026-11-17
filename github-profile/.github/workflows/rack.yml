@@ -24,14 +24,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Générer rack.svg
+      - name: Générer les baies
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 scripts/build_rack.py
 
       - name: Publier si la baie a changé
         run: |
-          git add rack.svg
+          git add rack.svg rack.en.svg
           if git diff --cached --quiet; then
             echo "Rien à publier."
             exit 0
