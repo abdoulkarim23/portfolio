@@ -11,7 +11,6 @@ import {
 import { useI18n } from "../i18n/LanguageContext";
 import { useToast } from "../hooks/use-toast";
 import { trackSpotlight } from "../lib/motion";
-import { ScrambleTitle } from "../fx/DecryptText";
 
 const FORMSUBMIT_URL =
   "https://formsubmit.co/ajax/5f89ddc9d69312d3a3a5d9e709830ec8";
@@ -87,7 +86,7 @@ const Contact = () => {
       <div className="container-xl">
         <div className="reveal max-w-2xl">
           <span className="section-eyebrow">{c.eyebrow}</span>
-          <ScrambleTitle>{c.heading}</ScrambleTitle>
+          <h2 className="display section-display">{c.heading}</h2>
           <p className="mt-4 text-white/65">{c.intro}</p>
         </div>
 
@@ -99,7 +98,7 @@ const Contact = () => {
               onMouseMove={trackSpotlight}
             >
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#c4845a]">
+                <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#B4F000]">
                   <Mail size={18} />
                 </div>
                 <div>
@@ -117,7 +116,7 @@ const Contact = () => {
               className="card-surface spotlight rounded-xl p-5 flex items-center gap-4"
               onMouseMove={trackSpotlight}
             >
-              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#c4845a]">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#B4F000]">
                 <MapPin size={18} />
               </div>
               <div>
@@ -197,7 +196,7 @@ const Contact = () => {
                     onChange={onChange}
                     required
                     placeholder={c.namePlaceholder}
-                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#c4845a]/60"
+                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#B4F000]/60"
                   />
                 </div>
                 <div>
@@ -212,7 +211,7 @@ const Contact = () => {
                     onChange={onChange}
                     required
                     placeholder={c.emailPlaceholder}
-                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#c4845a]/60"
+                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#B4F000]/60"
                   />
                 </div>
               </div>
@@ -228,7 +227,7 @@ const Contact = () => {
                   required
                   rows={6}
                   placeholder={c.messagePlaceholder}
-                  className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#c4845a]/60 resize-none"
+                  className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#B4F000]/60 resize-none"
                 />
               </div>
               <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">

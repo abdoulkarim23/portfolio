@@ -22,6 +22,11 @@ const SmoothScroll = () => {
     });
 
     lenis.on("scroll", ScrollTrigger.update);
+    const onLock = (event) => {
+      if (event.detail?.locked) lenis.stop();
+      else lenis.start();
+    };
+    window.addEventListener("portfolio:lock", onLock);
 
     const ticker = (time) => {
       lenis.raf(time * 1000);
@@ -40,6 +45,7 @@ const SmoothScroll = () => {
     });
 
     return () => {
+      window.removeEventListener("portfolio:lock", onLock);
       trigger.kill();
       gsap.ticker.remove(ticker);
       lenis.destroy();

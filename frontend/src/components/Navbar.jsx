@@ -1,118 +1,129 @@
 import React, { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { createPortal } from "react-dom";
 import { useI18n } from "../i18n/LanguageContext";
+import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion";
+import useMagnetic from "../lib/useMagnetic";
+import { setScrollLock } from "../lib/scrollLock";
 import LangToggle from "./LangToggle";
 
 const Navbar = () => {
   const { personal, t } = useI18n();
-  const [scrolled, setScrolled] = useState(false);
+  const reduced = usePrefersReducedMotion();
+  const magnet = useMagnetic(!reduced);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
+  const [hover, setHover] = useState(0);
+  const links = t.navLinks ?? [];
+  const preview = links[hover] || links[0];
 
   useEffect(() => {
-    let raf = 0;
-    const update = () => {
-      setScrolled(window.scrollY > 24);
-      const marker = window.scrollY + 120;
-      let current = "";
-      for (const link of t.navLinks) {
-        const el = document.getElementById(link.href.slice(1));
-        if (!el) continue;
-        const top = el.getBoundingClientRect().top + window.scrollY;
-        if (top <= marker) current = link.href;
-      }
-      setActive(current);
+    if (!open) return undefined;
+    setScrollLock(true);
+    const closeBtn = document.getElementById("menu-close");
+    closeBtn?.focus();
+    const onKey = (event) => {
+      if (event.key === "Escape") setOpen(false);
     };
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("keydown", onKey);
     return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      setScrollLock(false);
+      window.removeEventListener("keydown", onKey);
     };
-  }, [t.navLinks]);
+  }, [open]);
+
+  const close = () => setOpen(false);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "backdrop-blur-xl bg-[#141311]/75 border-b border-white/5"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container-xl flex items-center justify-between h-16 gap-3">
-        <a href="#top" className="flex items-center gap-2 group shrink-0">
-          <span className="w-8 h-8 rounded-md bg-white text-[#0b0b10] grid place-items-center font-semibold mono">
-            {personal.initials}
-          </span>
-          <span className="text-sm text-white/90 hidden sm:inline">
+    <header className="site-header">
+      <div className="container-xl header-bar">
+        <a href="#top" className="brand" onClick={close}>
+          <span className="brand-mark">{personal.initials}</span>
+          <span className="brand-name">
             {personal.name}
-            <span className="text-[#c4845a]">.</span>
           </span>
         </a>
-
-        <nav className="hidden lg:flex items-center gap-5">
-          {t.navLinks.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className={`nav-link text-sm${active === l.href ? " is-active" : ""}`}
-              aria-current={active === l.href ? "true" : undefined}
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="hidden lg:flex items-center gap-3 shrink-0">
+        <div className="header-actions">
           <LangToggle />
           <a
+            ref={magnet}
             href="#contact"
-            className="btn-primary rounded-md px-4 py-2 text-sm font-medium"
+            className="btn-primary magnet"
+            data-cursor="view"
           >
-            {t.ui.contactMe}
+            {t.ui.letsTalk}
           </a>
-        </div>
-
-        <div className="flex lg:hidden items-center gap-2">
-          <LangToggle />
           <button
-            className="text-white"
-            aria-label={open ? t.ui.closeMenu : t.ui.openMenu}
-            onClick={() => setOpen((o) => !o)}
+            type="button"
+            className="menu-toggle"
+            aria-expanded={open}
+            aria-controls="site-menu"
+            onClick={() => setOpen((value) => !value)}
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? t.ui.closeMenu : t.ui.menu}
           </button>
         </div>
       </div>
 
-      {open && (
-        <div className="lg:hidden border-t border-white/5 bg-[#141311]/95 backdrop-blur-xl">
-          <div className="container-xl py-4 flex flex-col gap-4">
-            {t.navLinks.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className={`nav-link text-sm${active === l.href ? " is-active" : ""}`}
-                onClick={() => setOpen(false)}
-              >
-                {l.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="btn-primary rounded-md px-4 py-2 text-sm text-center"
-            >
-              {t.ui.contactMe}
-            </a>
+      {open && createPortal(
+        <div
+          id="site-menu"
+          className="menu-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label={t.ui.menu}
+        >
+          <div className="container-xl menu-grid">
+            <nav className="menu-nav" aria-label={t.ui.navLabel}>
+              {links.map((link, index) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="menu-link display"
+                  onMouseEnter={() => setHover(index)}
+                  onFocus={() => setHover(index)}
+                  onClick={close}
+                >
+                  <span className="mono menu-index">{link.index}</span>
+                  <span>{link.label}</span>
+                </a>
+              ))}
+            </nav>
+            <aside className="menu-preview">
+              <p className="display menu-preview-index">{preview?.index}</p>
+              <p className="menu-preview-text">{preview?.preview}</p>
+              <div className="menu-social">
+                <p className="mono menu-social-label">{t.ui.elsewhere}</p>
+                <a
+                  href={personal.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={personal.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href={personal.planquia}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  planquia.com
+                </a>
+              </div>
+            </aside>
           </div>
-        </div>
+          <div className="menu-tools">
+            <LangToggle />
+            <button id="menu-close" type="button" className="menu-close" onClick={close}>
+              {t.ui.closeMenu}
+            </button>
+          </div>
+        </div>,
+        document.body
       )}
     </header>
   );

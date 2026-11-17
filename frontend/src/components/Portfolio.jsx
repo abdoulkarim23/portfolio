@@ -1,31 +1,31 @@
 import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
-import About from "./About";
-import Experience from "./Experience";
-import Projects from "./Projects";
-import Skills from "./Skills";
-import Education from "./Education";
-import Conjectura from "./Conjectura";
+import MarqueeLogos from "./MarqueeLogos";
+import EditorialDefinition from "./EditorialDefinition";
+import ProjectsShowcase from "./ProjectsShowcase";
+import StoryAndStats from "./StoryAndStats";
+import EthosGrid from "./EthosGrid";
+import FaqAccordion from "./FaqAccordion";
 import Contact from "./Contact";
 import Footer from "./Footer";
 import ScrollProgress from "./ScrollProgress";
-import SceneCanvas from "../scene/SceneCanvas";
+import CraftCursor from "./CraftCursor";
 import SmoothScroll from "../fx/SmoothScroll";
 
 const Portfolio = () => {
   useEffect(() => {
-    const els = document.querySelectorAll(".reveal, .draw-line");
+    const els = document.querySelectorAll(".reveal");
     const obs = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in-view");
-            obs.unobserve(e.target);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            obs.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.16 }
     );
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
@@ -34,22 +34,21 @@ const Portfolio = () => {
   return (
     <div className="relative">
       <SmoothScroll />
-      <SceneCanvas />
-      <div className="relative z-10">
+      <CraftCursor />
+      <div className="grain" aria-hidden="true" />
       <ScrollProgress />
       <Navbar />
       <main>
         <Hero />
-        <About />
-        <Experience />
-        <Projects />
-        <Skills />
-        <Education />
-        <Conjectura />
+        <MarqueeLogos />
+        <EditorialDefinition />
+        <ProjectsShowcase />
+        <StoryAndStats />
+        <EthosGrid />
+        <FaqAccordion />
         <Contact />
       </main>
       <Footer />
-      </div>
     </div>
   );
 };
