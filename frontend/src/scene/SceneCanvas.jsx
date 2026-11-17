@@ -3,6 +3,7 @@ import * as THREE from "three";
 import usePrefersReducedMotion from "../hooks/usePrefersReducedMotion";
 import { scrollMotion } from "./scrollMotion";
 import { createServerTunnel } from "./createServerTunnel";
+import { createAirlock } from "./createAirlock";
 
 function isMobileViewport() {
   return window.matchMedia("(max-width: 768px)").matches;
@@ -43,7 +44,7 @@ const SceneCanvas = () => {
     scene.add(key);
 
     const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 90);
-    camera.position.set(0, 0.35, 7.4);
+    camera.position.set(0, 0.55, 16.5);
 
     let renderer;
     try {
@@ -61,7 +62,7 @@ const SceneCanvas = () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.15 : 1.5));
     mount.appendChild(renderer.domElement);
 
-    const parts = [createServerTunnel(mobile)];
+    const parts = [createAirlock(), createServerTunnel(mobile)];
     parts.forEach((part) => scene.add(part.object));
 
     const resize = () => {
@@ -87,7 +88,10 @@ const SceneCanvas = () => {
       m.mouseY += (m.targetY - m.mouseY) * 0.045;
       const x = m.mouseX * 0.42;
       const y = 0.28 + m.mouseY * 0.22;
-      const z = 7.4 - m.progress * 16;
+      const intro = Math.min(1, t / 2.8);
+      const eased = 1 - (1 - intro) ** 3;
+      const enteredZ = 7.4 - m.progress * 16;
+      const z = 16.5 + (enteredZ - 16.5) * eased;
       camera.position.x += (x - camera.position.x) * 0.08;
       camera.position.y += (y - camera.position.y) * 0.08;
       camera.position.z += (z - camera.position.z) * 0.1;

@@ -21,7 +21,8 @@ const Hero = () => {
       gsap.from("[data-hero-rise]", {
         y: 18,
         opacity: 0,
-        duration: 0.8,
+        duration: 0.9,
+        delay: 1.15,
         stagger: 0.08,
         ease: "power2.out",
       });
@@ -32,7 +33,7 @@ const Hero = () => {
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24">
       <div
-        className="pointer-events-none absolute inset-0 z-[1]"
+        className="hero-veil pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
             "linear-gradient(90deg, rgba(20,19,17,0.94) 0%, rgba(20,19,17,0.62) 46%, rgba(20,19,17,0.12) 100%)",
