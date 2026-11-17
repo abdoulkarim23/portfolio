@@ -1,0 +1,24 @@
+---
+description: Bonnes pratiques Node.js pour le backend du portfolio (API, formulaire de contact)
+globs: backend/**/*.js, backend/**/*.ts
+alwaysApply: false
+---
+
+# Règles Backend Node.js
+
+## État actuel
+- Le site en ligne est statique : seul `frontend/` est déployé, et le formulaire de contact passe par FormSubmit côté navigateur.
+- `backend/` contient aujourd'hui un squelette Python (FastAPI, `server.py`) qui n'est pas déployé. Ces règles ne s'appliquent qu'au code Node.js ajouté dans `backend/`.
+
+## Structure & Séparation des rôles
+- Organise le code dans `backend/src/` par responsabilité : `routes/`, `controllers/`, `services/` et `middlewares/`.
+- Garde les contrôleurs légers : validation de la requête, appel au service, renvoi de la réponse HTTP (`200`, `201`, `400`, `500`).
+
+## Sécurité & Variables d'environnement
+- Configure **CORS** strictement pour n'autoriser que l'origine du portfolio (`https://abdoulkarim23.github.io`) et `http://localhost:3000` en développement.
+- Protège les endpoints publics (comme `/api/contact`) avec un **rate-limiter** (`express-rate-limit`) et une validation stricte des entrées (format d'e-mail, longueur des champs, échappement HTML).
+- Stocke toutes les clés API (SMTP, Resend, Nodemailer, etc.) dans un fichier `.env` ignoré par Git, jamais dans le code source.
+
+## Asynchrone & Gestion d'erreurs
+- Utilise `async/await` avec un middleware global de gestion d'erreurs en fin de chaîne Express/Fastify.
+- Retourne toujours des réponses JSON cohérentes (`{ success: boolean, message: string }`).
