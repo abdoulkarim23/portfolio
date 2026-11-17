@@ -1,0 +1,18 @@
+{
+  "user": "abdoulkarim23",
+  "max_units": 6,
+  "weeks": 12,
+  "exclude": [".github.io", "abdoulkarim-ali-tir-k"],
+  "descriptions": {
+    "portfolio": "Mon portfolio : React, Three.js, bilingue FR / EN",
+    "assistant-btp": "Prototype d'assistant pour le BTP : Flowise, Gemini",
+    "TP3-prediction": "TP : prédiction scikit-learn servie par Kafka",
+    "TP2-kafka": "TP : microservices Flask reliés par Kafka",
+    "TP-microservices": "TP : deux microservices Flask sous Docker"
+  },
+  "offline": {
+    "name": "HORS LIGNE",
+    "text": "HENSOLDT, État-major des armées (CIMD) : code sur réseaux isolés, non publié",
+    "tag": "air-gapped"
+  }
+}

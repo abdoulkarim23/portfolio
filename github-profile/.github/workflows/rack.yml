@@ -1,0 +1,42 @@
+name: Mettre à jour la baie
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  push:
+    branches: [main]
+    paths:
+      - scripts/**
+      - rack.json
+      - .github/workflows/rack.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rack
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Générer rack.svg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/build_rack.py
+
+      - name: Publier si la baie a changé
+        run: |
+          git add rack.svg
+          if git diff --cached --quiet; then
+            echo "Rien à publier."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Mettre à jour la baie"
+          git push
