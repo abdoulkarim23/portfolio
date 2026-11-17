@@ -13,6 +13,8 @@ export const personal = {
     url: "https://conjectura.fr",
     product: "Planquia",
   },
+  timeZone: "Europe/Paris",
+  clockCity: "PAR",
 };
 
 const skillsShared = {
@@ -60,15 +62,59 @@ export const copy = {
       rights: "Tous droits réservés.",
       crafted: "Conçu & développé avec rigueur • Paris",
       langSwitch: "Langue",
+      letsTalk: "Discutons",
+      menu: "Menu",
+      scrollDown: "Défiler",
+      cursorView: "Voir",
+      cursorDrag: "Glisser",
+      cursorCopy: "Copier",
+      copiedTitle: "Adresse copiée",
+      copiedBody: "Collez-la où vous voulez m'écrire.",
+      copyFailed: "Copie impossible",
+      closeCase: "Fermer",
+      readCase: "Lire le cas",
+      prevProject: "Projet précédent",
+      nextProject: "Projet suivant",
+      confidentialNote: "Confidentiel — pas de dépôt public.",
+      marqueeLabel: "Terrain",
     },
     navLinks: [
-      { href: "#about", label: "À propos" },
-      { href: "#experience", label: "Expérience" },
-      { href: "#projects", label: "Projets" },
-      { href: "#skills", label: "Compétences" },
-      { href: "#education", label: "Formation" },
-      { href: "#planquia", label: "Planquia" },
-      { href: "#contact", label: "Contact" },
+      {
+        href: "#about",
+        label: "Définition",
+        index: "01",
+        preview: "Ce que « production » veut dire, ici.",
+      },
+      {
+        href: "#projects",
+        label: "Projets",
+        index: "02",
+        preview: "NCORE AI, recherche NATO, Planquia.",
+      },
+      {
+        href: "#experience",
+        label: "Parcours",
+        index: "03",
+        preview: "HENSOLDT, l'État-major, Conjectura.",
+      },
+      {
+        href: "#ethos",
+        label: "Principes",
+        index: "04",
+        preview: "Mesurer, tenir sans cloud, porter le système.",
+      },
+      {
+        href: "#faq",
+        label: "Questions",
+        index: "05",
+        preview: "Lieu, confidentialité, façon d'écrire.",
+      },
+      {
+        href: "#contact",
+        label: "Contact",
+        index: "06",
+        preview: "Un message. Réponse sous 48 heures.",
+      },
     ],
     personal: {
       title: "Ingénieur IA/ML — Production GenAI",
@@ -189,7 +235,7 @@ export const copy = {
       ],
     },
     projects: {
-      eyebrow: "03  Réalisations",
+      eyebrow: "02  //  Réalisations",
       heading: "Projets sélectionnés",
       intro:
         "RAG de production, serving on-premise et produit SaaS — les systèmes que j'ai réellement déployés.",
@@ -328,7 +374,7 @@ export const copy = {
       ],
     },
     education: {
-      eyebrow: "05  Formation",
+      eyebrow: "Formation",
       heading: "Formation",
       intro:
         "Cursus ingénieur en mathématiques appliquées, informatique et intelligence artificielle.",
@@ -381,8 +427,100 @@ export const copy = {
         },
       ],
     },
+    marquee: [
+      "HENSOLDT",
+      "État-major — CIMD",
+      "Conjectura",
+      "CY Tech",
+      "ENSGSI",
+      "CPGE TSI",
+      "vLLM",
+      "FAISS",
+      "Python",
+      "FastAPI",
+      "Next.js",
+      "NVIDIA DGX",
+      "Mistral",
+      "PostgreSQL",
+    ],
+    definition: {
+      eyebrow: "01  //  Définition",
+      word: "Production",
+      phonetic: "/pʁɔ.dyk.sjɔ̃/",
+      pos: "nom féminin",
+      definition:
+        "Système GenAI qui tourne vraiment : données, retrieval, évaluation, latence, et un déploiement qui ne dépend pas d'un cloud quand le contexte l'interdit.",
+      citation:
+        "Hit@1 porté de 19 % à 31 % sur des PDF techniques, en air-gapped, à ~22 s par document.",
+      outcomesLabel: "Effets",
+      outcomes: ["Performance", "Scalabilité", "Clarté", "On-premise"],
+    },
+    story: {
+      eyebrow: "03  //  Parcours",
+      heading: "Du PDF technique au système qui tient",
+      lede: "Trois terrains. La même exigence : mesurer, déployer, laisser quelque chose d'utilisable.",
+    },
+    stats: [
+      { id: "hit", value: 12, prefix: "+", suffix: " pts", label: "Hit@1, NCORE AI" },
+      { id: "latency", value: 22, prefix: "~", suffix: " s", label: "par document" },
+      { id: "langs", value: 4, prefix: "", suffix: "", label: "langues de travail" },
+      { id: "systems", value: 3, prefix: "", suffix: "", label: "systèmes construits" },
+    ],
+    ethos: {
+      eyebrow: "04  //  Principes",
+      heading: "Comment je travaille",
+      items: [
+        {
+          index: "01",
+          title: "Mesurer",
+          text: "Un système n'est pas fini sans chiffre. Hit@1, latence, cas d'échec : l'évaluation fait partie du produit.",
+        },
+        {
+          index: "02",
+          title: "Tenir sans cloud",
+          text: "On-premise et air-gapped quand le contexte l'exige. vLLM, FAISS, hardware contraint, pas une démo qui appelle une API.",
+        },
+        {
+          index: "03",
+          title: "Porter le système",
+          text: "Des données à l'interface. Préparation, retrieval, serving, API : une seule ownership, de bout en bout.",
+        },
+        {
+          index: "04",
+          title: "Rendre ça utilisable",
+          text: "CLI, Streamlit ou SaaS. Quelqu'un doit pouvoir s'en servir sans lire le dépôt.",
+        },
+      ],
+    },
+    faq: {
+      eyebrow: "05  //  Questions",
+      heading: "Les bases",
+      items: [
+        {
+          q: "Où travaillez-vous ?",
+          a: "À Paris. Alternance à l'État-major des armées (CIMD) jusqu'en août 2027, et en parallèle Conjectura, dont je suis co-fondateur et CTO.",
+        },
+        {
+          q: "Sur quoi ?",
+          a: "Des systèmes GenAI de production : RAG, recherche sémantique, serving de LLMs on-premise et air-gapped. Et Planquia, le SaaS qui transforme des plans PDF de construction en devis.",
+        },
+        {
+          q: "Peut-on voir le code des projets défense ?",
+          a: "Non. NCORE AI (HENSOLDT) et la recherche NATO (CIMD) sont confidentiels. Planquia est public : planquia.com.",
+        },
+        {
+          q: "Comment vous écrire ?",
+          a: "Le formulaire, ou l'email. Je réponds sous 24–48 h. Pas de numéro de téléphone, volontairement.",
+        },
+      ],
+    },
+    cta: {
+      heading: "Un projet ambitieux en tête ?",
+      body: "Un RAG à industrialiser, un serving on-premise, ou Planquia. Écrivez-moi — je lis chaque message.",
+      copy: "Copier l'email",
+    },
     contact: {
-      eyebrow: "07  Contact",
+      eyebrow: "06  //  Contact",
       heading: "Discutons de votre projet",
       intro:
         "Un système RAG à industrialiser, un déploiement on-premise, une collaboration autour de Planquia — écrivez-moi, je lis chaque message.",
@@ -427,15 +565,59 @@ export const copy = {
       rights: "All rights reserved.",
       crafted: "Designed & built with care • Paris",
       langSwitch: "Language",
+      letsTalk: "Let's talk",
+      menu: "Menu",
+      scrollDown: "Scroll",
+      cursorView: "View",
+      cursorDrag: "Drag",
+      cursorCopy: "Copy",
+      copiedTitle: "Address copied",
+      copiedBody: "Paste it wherever you want to write to me.",
+      copyFailed: "Could not copy",
+      closeCase: "Close",
+      readCase: "Read the case",
+      prevProject: "Previous project",
+      nextProject: "Next project",
+      confidentialNote: "Confidential — no public repository.",
+      marqueeLabel: "Ground",
     },
     navLinks: [
-      { href: "#about", label: "About" },
-      { href: "#experience", label: "Experience" },
-      { href: "#projects", label: "Projects" },
-      { href: "#skills", label: "Skills" },
-      { href: "#education", label: "Education" },
-      { href: "#planquia", label: "Planquia" },
-      { href: "#contact", label: "Contact" },
+      {
+        href: "#about",
+        label: "Definition",
+        index: "01",
+        preview: "What “production” means here.",
+      },
+      {
+        href: "#projects",
+        label: "Projects",
+        index: "02",
+        preview: "NCORE AI, NATO search, Planquia.",
+      },
+      {
+        href: "#experience",
+        label: "Path",
+        index: "03",
+        preview: "HENSOLDT, the General Staff, Conjectura.",
+      },
+      {
+        href: "#ethos",
+        label: "Principles",
+        index: "04",
+        preview: "Measure, run without a cloud, own the system.",
+      },
+      {
+        href: "#faq",
+        label: "Questions",
+        index: "05",
+        preview: "Where, confidentiality, how to write.",
+      },
+      {
+        href: "#contact",
+        label: "Contact",
+        index: "06",
+        preview: "A message. A reply within 48 hours.",
+      },
     ],
     personal: {
       title: "AI/ML Engineer — Production GenAI",
@@ -556,7 +738,7 @@ export const copy = {
       ],
     },
     projects: {
-      eyebrow: "03  Work",
+      eyebrow: "02  //  Work",
       heading: "Selected projects",
       intro:
         "Production RAG, on-premise serving, and a SaaS product — systems I have actually shipped.",
@@ -695,7 +877,7 @@ export const copy = {
       ],
     },
     education: {
-      eyebrow: "05  Education",
+      eyebrow: "Education",
       heading: "Education",
       intro:
         "Engineering track in applied mathematics, computer science, and artificial intelligence.",
@@ -748,8 +930,100 @@ export const copy = {
         },
       ],
     },
+    marquee: [
+      "HENSOLDT",
+      "Armed Forces — CIMD",
+      "Conjectura",
+      "CY Tech",
+      "ENSGSI",
+      "CPGE TSI",
+      "vLLM",
+      "FAISS",
+      "Python",
+      "FastAPI",
+      "Next.js",
+      "NVIDIA DGX",
+      "Mistral",
+      "PostgreSQL",
+    ],
+    definition: {
+      eyebrow: "01  //  Definition",
+      word: "Production",
+      phonetic: "/prəˈdʌk.ʃən/",
+      pos: "noun",
+      definition:
+        "A GenAI system that actually runs: data, retrieval, evaluation, latency, and a deployment that does not depend on a cloud when the context forbids it.",
+      citation:
+        "Hit@1 raised from 19% to 31% on technical PDFs, air-gapped, at ~22 s per document.",
+      outcomesLabel: "Outcomes",
+      outcomes: ["Performance", "Scalability", "Clarity", "On-premise"],
+    },
+    story: {
+      eyebrow: "03  //  Path",
+      heading: "From a technical PDF to a system that holds",
+      lede: "Three grounds. The same demand: measure, deploy, leave something people can use.",
+    },
+    stats: [
+      { id: "hit", value: 12, prefix: "+", suffix: " pts", label: "Hit@1, NCORE AI" },
+      { id: "latency", value: 22, prefix: "~", suffix: " s", label: "per document" },
+      { id: "langs", value: 4, prefix: "", suffix: "", label: "working languages" },
+      { id: "systems", value: 3, prefix: "", suffix: "", label: "systems built" },
+    ],
+    ethos: {
+      eyebrow: "04  //  Principles",
+      heading: "How I work",
+      items: [
+        {
+          index: "01",
+          title: "Measure",
+          text: "A system is not finished without a number. Hit@1, latency, failure cases: evaluation is part of the product.",
+        },
+        {
+          index: "02",
+          title: "Run without a cloud",
+          text: "On-premise and air-gapped when the context demands it. vLLM, FAISS, constrained hardware — not a demo calling an API.",
+        },
+        {
+          index: "03",
+          title: "Own the system",
+          text: "From data to interface. Preparation, retrieval, serving, API: one ownership, end to end.",
+        },
+        {
+          index: "04",
+          title: "Make it usable",
+          text: "CLI, Streamlit, or SaaS. Someone has to be able to use it without reading the repository.",
+        },
+      ],
+    },
+    faq: {
+      eyebrow: "05  //  Questions",
+      heading: "The basics",
+      items: [
+        {
+          q: "Where do you work?",
+          a: "Paris. An apprenticeship at the French Armed Forces General Staff (CIMD) through August 2027, and in parallel Conjectura, where I am co-founder and CTO.",
+        },
+        {
+          q: "On what?",
+          a: "Production GenAI systems: RAG, semantic search, on-premise and air-gapped LLM serving. And Planquia, the SaaS that turns construction PDF plans into quotations.",
+        },
+        {
+          q: "Can I see the defence project code?",
+          a: "No. NCORE AI (HENSOLDT) and the NATO search (CIMD) are confidential. Planquia is public: planquia.com.",
+        },
+        {
+          q: "How do I write to you?",
+          a: "The form, or email. I reply within 24–48 h. No phone number, on purpose.",
+        },
+      ],
+    },
+    cta: {
+      heading: "Something ambitious in mind?",
+      body: "A RAG system to industrialise, on-premise serving, or Planquia. Write to me — I read every message.",
+      copy: "Copy email",
+    },
     contact: {
-      eyebrow: "07  Contact",
+      eyebrow: "06  //  Contact",
       heading: "Tell me about your project",
       intro:
         "A RAG system to industrialise, an on-premise rollout, a collaboration around Planquia — write to me, I read every message.",
