@@ -1,0 +1,18 @@
+---
+description: Règles de compatibilité SPA et déploiement GitHub Pages
+globs: frontend/public/**/*, frontend/package.json, .github/workflows/deploy.yml
+alwaysApply: false
+---
+
+# Règles GitHub Pages & CI/CD
+
+## Spécificités SPA sur GitHub Pages
+- Ne supprime jamais `frontend/public/.nojekyll` (indispensable pour que GitHub Pages serve les fichiers commençant par `_`).
+- `frontend/public/404.html` redirige les sous-routes vers l'application, et le script « Single Page Apps for GitHub Pages » de `frontend/public/index.html` décode cette redirection. Garde les deux ensemble.
+- Le site est servi sous `/portfolio`. Ce sous-chemin est défini à quatre endroits qui doivent rester cohérents : `homepage` dans `frontend/package.json`, `PUBLIC_URL` dans `deploy.yml`, `basename` dans `frontend/src/App.js`, et `pathSegmentsToKeep = 1` dans `404.html`.
+- Pour les assets statiques de `public/`, utilise `process.env.PUBLIC_URL` (ou `%PUBLIC_URL%` dans `index.html`), jamais un chemin absolu commençant par `/`.
+
+## Workflow CI/CD (`.github/workflows/deploy.yml`)
+- Un push sur `main` construit `frontend/` et publie `frontend/build` sur la branche `gh-pages`. Rien n'est en ligne tant que le changement n'est pas dans `main`.
+- Les étapes d'installation et de build doivent garder `working-directory: ./frontend`.
+- GitHub Actions définit `CI=true`, donc tout warning ESLint fait échouer le build. Vérifie en local avec `CI=true npm run build` dans `frontend/` avant de pousser.

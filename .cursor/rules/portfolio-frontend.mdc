@@ -1,0 +1,24 @@
+---
+description: Architecture, composants React et gestion des données dans frontend/
+globs: frontend/src/**/*.js, frontend/src/**/*.jsx, frontend/src/**/*.css
+alwaysApply: false
+---
+
+# Règles Frontend — Portfolio React
+
+## Architecture & Composants (`frontend/src/components/`)
+- Chaque section du portfolio (Hero, About, Experience, Projects, Skills, Education, Conjectura, Contact) est isolée dans son propre composant `.jsx` sous `frontend/src/components/`.
+- `frontend/src/components/Portfolio.jsx` assemble les sections. `frontend/src/App.js` ne contient que les providers et le routeur : n'y mets ni logique complexe ni données en dur.
+- Utilise des composants fonctionnels et du JavaScript ES6+ propre (destructuration des props, optional chaining `?.`). Le projet est en JavaScript, pas en TypeScript.
+
+## Gestion des données (`frontend/src/mock.js`)
+- Ne mets **aucun texte, lien, liste de projets ou compétence en dur** dans les composants UI.
+- Tout le contenu vit dans `frontend/src/mock.js` : `personal` pour les liens et l'identité, `copy.fr` et `copy.en` pour les textes.
+- Le site est bilingue. Tout texte ajouté ou modifié doit l'être dans `copy.fr` **et** dans `copy.en`, avec la même structure et les mêmes `id`.
+- Les composants lisent le contenu via `useI18n()` (`frontend/src/i18n/LanguageContext.jsx`), pas en important `copy` directement.
+- Prévois des vérifications (`items?.map(...)`) au cas où une entrée de `mock.js` serait vide.
+
+## UI, Responsive & Accessibilité
+- Assure un rendu responsive (mobile, tablette, desktop) pour chaque section.
+- Utilise des balises sémantiques (`<header>`, `<main>`, `<section id="...">`, `<footer>`, `<nav>`). Les `id` de section doivent correspondre aux ancres de `navLinks` dans `mock.js`.
+- Ajoute `target="_blank"` et `rel="noopener noreferrer"` sur tous les liens externes (GitHub, LinkedIn, démos), et des attributs `alt` descriptifs sur les images.
