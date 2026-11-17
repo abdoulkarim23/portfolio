@@ -77,6 +77,9 @@ export const copy = {
       location: "Paris, France",
       status: "Co-fondateur & CTO, Conjectura • GenAI on-premise",
       companyRole: "Co-fondateur & CTO",
+      whereLabel: "Lieu",
+      roleLabel: "Rôle",
+      nowLabel: "Produit",
       chips: [
         "Production GenAI",
         "RAG hybride",
@@ -87,7 +90,7 @@ export const copy = {
         "Ingénieur IA/ML — GenAI de production, RAG et déploiement on-premise. Basé à Paris.",
     },
     about: {
-      eyebrow: "// 01 — Profil",
+      eyebrow: "01  Profil",
       heading: "Des systèmes GenAI qui tiennent en production",
       paragraphs: [
         "Ingénieur IA/ML, je construis des systèmes GenAI de production — RAG, recherche sémantique et serving de LLMs — avec une ownership de bout en bout : préparation des données, modélisation, évaluation et optimisation de latence.",
@@ -102,7 +105,7 @@ export const copy = {
       ],
     },
     experience: {
-      eyebrow: "// 02 — Parcours",
+      eyebrow: "02  Parcours",
       heading: "Expérience professionnelle",
       items: [
         {
@@ -186,7 +189,7 @@ export const copy = {
       ],
     },
     projects: {
-      eyebrow: "// 03 — Réalisations",
+      eyebrow: "03  Réalisations",
       heading: "Projets sélectionnés",
       intro:
         "RAG de production, serving on-premise et produit SaaS — les systèmes que j'ai réellement déployés.",
@@ -255,7 +258,7 @@ export const copy = {
       ],
     },
     skills: {
-      eyebrow: "// 04 — Stack",
+      eyebrow: "04  Stack",
       heading: "Compétences techniques",
       intro:
         "Une stack pensée pour le GenAI de production — y compris le serving local, air-gapped, sur hardware contraint.",
@@ -325,7 +328,7 @@ export const copy = {
       ],
     },
     education: {
-      eyebrow: "// 05 — Académique",
+      eyebrow: "05  Formation",
       heading: "Formation",
       intro:
         "Cursus ingénieur en mathématiques appliquées, informatique et intelligence artificielle.",
@@ -354,7 +357,7 @@ export const copy = {
       ],
     },
     planquia: {
-      eyebrow: "// 06 — Produit",
+      eyebrow: "06  Produit",
       heading: "Planquia — le produit que je construis",
       intro:
         "Co-fondateur & CTO de Conjectura, je développe Planquia : un SaaS qui lit des plans de construction et en sort des devis structurés.",
@@ -379,7 +382,7 @@ export const copy = {
       ],
     },
     contact: {
-      eyebrow: "// 07 — Entrons en contact",
+      eyebrow: "07  Contact",
       heading: "Discutons de votre projet",
       intro:
         "Un système RAG à industrialiser, un déploiement on-premise, une collaboration autour de Planquia — écrivez-moi, je lis chaque message.",
@@ -441,6 +444,9 @@ export const copy = {
       location: "Paris, France",
       status: "Co-founder & CTO, Conjectura • On-premise GenAI",
       companyRole: "Co-founder & CTO",
+      whereLabel: "Based",
+      roleLabel: "Role",
+      nowLabel: "Product",
       chips: [
         "Production GenAI",
         "Hybrid RAG",
@@ -451,7 +457,7 @@ export const copy = {
         "AI/ML engineer — production GenAI, RAG, and on-premise deployment. Based in Paris.",
     },
     about: {
-      eyebrow: "// 01 — Profile",
+      eyebrow: "01  Profile",
       heading: "GenAI systems that hold up in production",
       paragraphs: [
         "As an AI/ML engineer, I build production GenAI systems — RAG, semantic search, and LLM serving — with end-to-end ownership: data prep, modeling, evaluation, and latency tuning.",
@@ -466,7 +472,7 @@ export const copy = {
       ],
     },
     experience: {
-      eyebrow: "// 02 — Path",
+      eyebrow: "02  Path",
       heading: "Professional experience",
       items: [
         {
@@ -550,7 +556,7 @@ export const copy = {
       ],
     },
     projects: {
-      eyebrow: "// 03 — Work",
+      eyebrow: "03  Work",
       heading: "Selected projects",
       intro:
         "Production RAG, on-premise serving, and a SaaS product — systems I have actually shipped.",
@@ -619,7 +625,7 @@ export const copy = {
       ],
     },
     skills: {
-      eyebrow: "// 04 — Stack",
+      eyebrow: "04  Stack",
       heading: "Technical skills",
       intro:
         "A stack built for production GenAI — including local, air-gapped serving on constrained hardware.",
@@ -689,7 +695,7 @@ export const copy = {
       ],
     },
     education: {
-      eyebrow: "// 05 — Academic",
+      eyebrow: "05  Education",
       heading: "Education",
       intro:
         "Engineering track in applied mathematics, computer science, and artificial intelligence.",
@@ -718,7 +724,7 @@ export const copy = {
       ],
     },
     planquia: {
-      eyebrow: "// 06 — Product",
+      eyebrow: "06  Product",
       heading: "Planquia — the product I am building",
       intro:
         "As co-founder & CTO of Conjectura, I am building Planquia: a SaaS that reads construction plans and outputs structured quotations.",
@@ -743,7 +749,7 @@ export const copy = {
       ],
     },
     contact: {
-      eyebrow: "// 07 — Let's talk",
+      eyebrow: "07  Contact",
       heading: "Tell me about your project",
       intro:
         "A RAG system to industrialise, an on-premise rollout, a collaboration around Planquia — write to me, I read every message.",

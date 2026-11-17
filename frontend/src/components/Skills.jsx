@@ -29,7 +29,7 @@ const SkillCard = ({ skill, delay = 0 }) => {
       onMouseLeave={resetTilt}
     >
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff]">
+        <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#c4845a]">
           <Icon size={18} />
         </div>
         <h3 className="text-white font-medium">{skill.category}</h3>
@@ -75,7 +75,7 @@ const Skills = () => {
         <div className="mt-12 grid md:grid-cols-12 gap-5 reveal">
           <div className="md:col-span-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff]">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#c4845a]">
                 <Globe size={18} />
               </div>
               <h3 className="text-white font-medium">{section.languagesTitle}</h3>
@@ -96,7 +96,7 @@ const Skills = () => {
                 </div>
                 <div className="mt-3 h-1 rounded-full bg-white/5 overflow-hidden">
                   <div
-                    className="lang-fill h-full bg-gradient-to-r from-[#00f0ff] to-[#00ff66]"
+                    className="lang-fill h-full bg-gradient-to-r from-[#c4845a] to-[#e6c2a0]"
                     style={{ "--w": `${l.value}%` }}
                   />
                 </div>
