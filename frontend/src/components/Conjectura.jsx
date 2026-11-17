@@ -47,7 +47,7 @@ const Conjectura = () => {
             onMouseMove={trackSpotlight}
           >
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff]">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#c4845a]">
                 <Building2 size={18} />
               </div>
               <div>
@@ -96,7 +96,7 @@ const Conjectura = () => {
                   onMouseLeave={resetTilt}
                 >
                   <div className="flex gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff] shrink-0">
+                    <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#c4845a] shrink-0">
                       <Icon size={18} />
                     </div>
                     <div>

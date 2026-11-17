@@ -99,7 +99,7 @@ const Contact = () => {
               onMouseMove={trackSpotlight}
             >
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff]">
+                <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#c4845a]">
                   <Mail size={18} />
                 </div>
                 <div>
@@ -117,7 +117,7 @@ const Contact = () => {
               className="card-surface spotlight rounded-xl p-5 flex items-center gap-4"
               onMouseMove={trackSpotlight}
             >
-              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#00f0ff]">
+              <div className="w-10 h-10 rounded-lg bg-white/[0.04] border border-white/10 grid place-items-center text-[#c4845a]">
                 <MapPin size={18} />
               </div>
               <div>
@@ -197,7 +197,7 @@ const Contact = () => {
                     onChange={onChange}
                     required
                     placeholder={c.namePlaceholder}
-                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#00f0ff]/60"
+                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#c4845a]/60"
                   />
                 </div>
                 <div>
@@ -212,7 +212,7 @@ const Contact = () => {
                     onChange={onChange}
                     required
                     placeholder={c.emailPlaceholder}
-                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#00f0ff]/60"
+                    className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#c4845a]/60"
                   />
                 </div>
               </div>
@@ -228,7 +228,7 @@ const Contact = () => {
                   required
                   rows={6}
                   placeholder={c.messagePlaceholder}
-                  className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#00f0ff]/60 resize-none"
+                  className="mt-2 w-full bg-transparent border border-white/10 rounded-md px-3 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-[#c4845a]/60 resize-none"
                 />
               </div>
               <div className="mt-6 flex items-center justify-between gap-4 flex-wrap">

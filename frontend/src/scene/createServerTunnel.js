@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
-const CYAN = new THREE.Color("#00f0ff");
-const RED = new THREE.Color("#ff3355");
+const CYAN = new THREE.Color("#e6c2a0");
+const RED = new THREE.Color("#c4845a");
 
 function pushTransformed(target, attribute, matrix) {
   const v = new THREE.Vector3();
@@ -66,9 +66,9 @@ export function createServerTunnel(mobile) {
   const edges = new THREE.LineSegments(
     edgesGeo,
     new THREE.LineBasicMaterial({
-      color: 0x00f0ff,
+      color: 0xc4845a,
       transparent: true,
-      opacity: 0.35,
+      opacity: 0.55,
       toneMapped: false,
     })
   );
@@ -115,7 +115,7 @@ export function createServerTunnel(mobile) {
   const dropLines = new THREE.LineSegments(
     dropGeo,
     new THREE.LineBasicMaterial({
-      color: 0x00ff66,
+      color: 0xc4845a,
       transparent: true,
       opacity: 0.45,
       depthWrite: false,
@@ -138,7 +138,7 @@ export function createServerTunnel(mobile) {
   const packetPoints = new THREE.Points(
     packetGeo,
     new THREE.PointsMaterial({
-      color: 0x00f0ff,
+      color: 0xe6d3bc,
       size: mobile ? 0.045 : 0.03,
       transparent: true,
       opacity: 0.8,
