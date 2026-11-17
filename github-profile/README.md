@@ -10,7 +10,7 @@ Ingénieur IA/ML. Je mets en production des systèmes GenAI (RAG, recherche sém
 
 La plus grande partie de mon code tourne sur des réseaux isolés et n'en sortira pas. Voici ce que je peux en dire.
 
-**HENSOLDT, juin à septembre 2026.** NCORE AI, un système RAG qui retrouve le code NATO Item Name d'un équipement à partir de sa documentation PDF. Déployé en environnement air-gapped sur NVIDIA DGX Spark avec vLLM. Hit@1 passé de 19 % à 31 %, environ 22 s par document.
+**HENSOLDT, juin à septembre 2026.** NCORE AI, un système RAG qui retrouve le code NATO Item Name d'un équipement à partir de sa documentation PDF. Déployé en environnement air-gapped sur NVIDIA DGX Spark avec vLLM. Hit@1 passé de 19&nbsp;% à 31&nbsp;%, environ 22&nbsp;s par document.
 
 **État-major des armées (CIMD), 2024 à 2027.** En alternance. Moteur de recherche sémantique et assistant pour la codification NATO : multilingual-e5-large, FAISS, Mistral.
 
